@@ -1,0 +1,22 @@
+{
+    "name": "System.Services.Authentication",
+    "rootNamespace": "",
+    "references": [
+        "GUID:5540e30183c82e84b954c033c388e06c"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [
+        {
+            "name": "com.unity.services.authentication",
+            "expression": "3.0.0",
+            "define": "Authentication"
+        }
+    ],
+    "noEngineReferences": false
+}

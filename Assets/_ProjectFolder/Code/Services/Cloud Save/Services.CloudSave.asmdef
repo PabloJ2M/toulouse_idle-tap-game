@@ -1,8 +1,9 @@
 {
-    "name": "System.Services.Authentication",
-    "rootNamespace": "Unity.Services.Authentication",
+    "name": "Services.CloudSave",
+    "rootNamespace": "",
     "references": [
-        "GUID:5540e30183c82e84b954c033c388e06c"
+        "GUID:5540e30183c82e84b954c033c388e06c",
+        "GUID:be0d2672886cc45b2bcea5a5053a5347"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],
@@ -16,6 +17,11 @@
             "name": "com.unity.services.authentication",
             "expression": "3.0.0",
             "define": "Authentication"
+        },
+        {
+            "name": "com.unity.services.cloudsave",
+            "expression": "3.0.0",
+            "define": "CloudSave"
         }
     ],
     "noEngineReferences": false

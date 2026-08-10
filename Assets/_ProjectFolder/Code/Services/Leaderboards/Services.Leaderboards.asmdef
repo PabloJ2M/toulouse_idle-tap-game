@@ -1,9 +1,9 @@
 {
-    "name": "System.Services.CloudSave",
+    "name": "Services.Leaderboards",
     "rootNamespace": "",
     "references": [
-        "GUID:be0d2672886cc45b2bcea5a5053a5347",
-        "GUID:8eac60e5e7810e94c93b306dc37b1125"
+        "GUID:5540e30183c82e84b954c033c388e06c",
+        "GUID:2073209246492244c9ad62c89d8d37bb"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],
@@ -19,9 +19,9 @@
             "define": "Authentication"
         },
         {
-            "name": "com.unity.services.cloudsave",
-            "expression": "3.0.0",
-            "define": "CloudSave"
+            "name": "com.unity.services.leaderboards",
+            "expression": "2.0.0",
+            "define": "Leaderboards"
         }
     ],
     "noEngineReferences": false

@@ -1,6 +1,6 @@
 {
     "name": "System.Services.Authentication",
-    "rootNamespace": "",
+    "rootNamespace": "Unity.Services.Authentication",
     "references": [
         "GUID:5540e30183c82e84b954c033c388e06c"
     ],

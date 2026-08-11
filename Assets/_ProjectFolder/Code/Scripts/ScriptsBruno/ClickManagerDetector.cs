@@ -1,12 +1,5 @@
-using System;
-using System.Collections.Generic;
-using System.Runtime.CompilerServices;
 using UnityEngine;
-using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
-using UnityEngine.UIElements;
-
-
 public class ClickManagerDetector : MonoBehaviour // script general para detectar todos los objs interactuables
 {    
     InputAction tap;
@@ -25,8 +18,6 @@ public class ClickManagerDetector : MonoBehaviour // script general para detecta
     }
     private void DetectInput(InputAction.CallbackContext ctx) // ahora si funciona :)
     {        
-        PointerEventData pointerData = new PointerEventData(EventSystem.current);
-
         Vector2 position = Vector2.zero;
         if (Touchscreen.current != null && Touchscreen.current.primaryTouch.press.isPressed)
         {
@@ -37,23 +28,12 @@ public class ClickManagerDetector : MonoBehaviour // script general para detecta
             position = Mouse.current.position.ReadValue();
         }
 
-        pointerData.position = position;
-        List<RaycastResult> results = new List<RaycastResult>();
-        EventSystem.current.RaycastAll(pointerData, results);
+        var obj = InputUtils.GetTopUIElement(position);
+        IClickable clickable = null;
 
-        foreach (var result in results) 
-        {
-            IClickable clickable = result.gameObject.transform.GetComponent<IClickable>();
-            if (clickable != null)
-            {
-                clickable.click();
-                print("Esta entrando!");
-            }
-            else 
-            {
-                print("No hay nada que clickear");
-            }
-        }
-        print("al menos hace algo");        
+        if (obj != null) clickable = obj.GetComponent<IClickable>();
+        else return;
+
+        clickable.click();
     }
 }

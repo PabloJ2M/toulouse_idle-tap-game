@@ -9,7 +9,7 @@ public class ResourceManager : MonoBehaviour
     private Coroutine goldCoroutine;
     private void Start()
     {
-        ChestDetection.instance.giveResources += ActiveObtain;
+        ChestDetection._instance.giveResources += ActiveObtain;
     }
     private void ActiveObtain(bool chestDetect)
     {

@@ -1,15 +1,15 @@
 using UnityEngine;
 using System.Collections;
+using System;
 
 public class ResourceManager : MonoBehaviour
 {
-    [SerializeField] private ResourcesInventory inventory;
-    [SerializeField] private ChestDetection tap;
+    [SerializeField] private ResourcesInventory inventory;    
 
     private Coroutine goldCoroutine;
     private void Start()
     {
-        tap.giveResources += ActiveObtain;
+        ChestDetection.instance.giveResources += ActiveObtain;
     }
     private void ActiveObtain(bool chestDetect)
     {

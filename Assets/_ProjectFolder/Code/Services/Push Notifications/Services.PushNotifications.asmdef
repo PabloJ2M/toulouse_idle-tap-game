@@ -1,0 +1,25 @@
+{
+    "name": "Services.PushNotifications",
+    "rootNamespace": "Unity.Notifications",
+    "references": [
+        "GUID:75dec5bced1f541bcb6d18b71e4d2039",
+        "GUID:ac145e6b8c6034cdbadc8c6e26aedbcf",
+        "GUID:1e8e55397bd004beaba78a667566665f",
+        "GUID:362de69ccaec31d4db977285166685f9"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [
+        {
+            "name": "com.unity.services.push-notifications",
+            "expression": "4.0.0",
+            "define": "Notifications"
+        }
+    ],
+    "noEngineReferences": false
+}

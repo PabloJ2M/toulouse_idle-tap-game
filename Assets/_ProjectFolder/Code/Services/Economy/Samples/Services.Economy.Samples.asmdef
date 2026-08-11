@@ -1,6 +1,6 @@
 {
     "name": "Services.Economy.Samples",
-    "rootNamespace": "",
+    "rootNamespace": "Unity.Services.Economy",
     "references": [
         "GUID:5540e30183c82e84b954c033c388e06c",
         "GUID:883598a1d14d64bda9d1d6e183355ea9",

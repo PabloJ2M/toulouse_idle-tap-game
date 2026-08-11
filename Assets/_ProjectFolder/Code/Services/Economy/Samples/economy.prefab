@@ -59,8 +59,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Services.Economy::Unity.Services.Economy.EconomyManager
   balances:
-    keys: 01000000
-    values: 0000000000000000
+    keys: 0100000002000000
+    values: 00000000000000000000000000000000
 --- !u!114 &5188676311623706137
 MonoBehaviour:
   m_ObjectHideFlags: 0

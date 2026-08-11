@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace Unity.Services.Authentication
+namespace Unity.Services.Authentication.PlayerAccounts
 {
     public class AuthenticationManager : SingletonBasic<AuthenticationManager>
     {
@@ -25,7 +25,7 @@ namespace Unity.Services.Authentication
             if (result.Success) return;
             
             Debug.LogWarning($"Automatic Login failed ({result.Code}).");
-            await AuthenticationService.Instance.SignInAnonymouslyAsync().AuthResponse();
+            await AuthenticationService.Instance.SignInAnonymouslyAsync().Response();
         }
     }
 }

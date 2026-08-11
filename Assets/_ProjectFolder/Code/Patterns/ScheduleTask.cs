@@ -1,5 +1,6 @@
 using System;
 using UnityEngine;
+using Object = UnityEngine.Object;
 
 public class ScheduleVersion
 {
@@ -9,25 +10,17 @@ public class ScheduleVersion
     public bool IsCurrent(int version) => version == _current;
 }
 
-public abstract class ScheduleBehaviour : MonoBehaviour
+public static class ScheduleExtension
 {
-    protected async void ScheduleAction(float time, ScheduleVersion version, int currentVersion, Action onComplete)
+    public static void Schedule(this Object owner, float time, ScheduleVersion version, Action onComplete) =>
+        _ = owner.ScheduleAsync(time, version, onComplete);
+    
+    private static async Awaitable ScheduleAsync(this Object owner, float time, ScheduleVersion version, Action onComplete)
     {
+        int currentVersion = version.Next();
         await Awaitable.WaitForSecondsAsync(time);
-        
-        if (this && version.IsCurrent(currentVersion))
-            onComplete?.Invoke();
-    }
-}
-
-public abstract class ScheduleScriptable : ScriptableObject
-{
-    protected async void ScheduleAction(float time, ScheduleVersion version, Action onComplete)
-    {
-        int nextVersion = version.Next();
-        await Awaitable.WaitForSecondsAsync(time);
-        
-        if (this && version.IsCurrent(nextVersion))
+ 
+        if (owner && version.IsCurrent(currentVersion))
             onComplete?.Invoke();
     }
 }

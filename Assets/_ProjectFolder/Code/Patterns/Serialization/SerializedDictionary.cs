@@ -8,27 +8,29 @@ public class SerializedDictionary<TKey, TValue> : ISerializationCallbackReceiver
     [SerializeField] private List<TKey> keys = new();
     [SerializeField] private List<TValue> values = new();
 
-    private Dictionary<TKey, TValue> _dictionary = new();
-
-    public int Count => _dictionary.Count;
+    public Dictionary<TKey, TValue> Dictionary { get; private set; } = new();
+    public List<TKey> Keys => keys;
+    public List<TValue> Values => values;
+    public int Count => Dictionary.Count;
 
     public TValue this[TKey key]
     {
-        get => _dictionary[key];
-        set => _dictionary[key] = value;
+        get => Dictionary[key];
+        set => Dictionary[key] = value;
     }
 
-    public void Add(TKey key, TValue value) => _dictionary.Add(key, value);
-    public bool Remove(TKey key) => _dictionary.Remove(key);
-    public bool ContainsKey(TKey key) => _dictionary.ContainsKey(key);
-    public bool TryGetValue(TKey key, out TValue value) => _dictionary.TryGetValue(key, out value);
+    public void Add(TKey key, TValue value) => Dictionary.Add(key, value);
+    public bool Remove(TKey key) => Dictionary.Remove(key);
+    public bool ContainsKey(TKey key) => Dictionary.ContainsKey(key);
+    public bool TryGetValue(TKey key, out TValue value) => Dictionary.TryGetValue(key, out value);
+    public void Clear() => Dictionary.Clear();
 
     public void OnBeforeSerialize()
     {
         keys.Clear();
         values.Clear();
         
-        foreach (var kvp in _dictionary)
+        foreach (var kvp in Dictionary)
         {
             keys.Add(kvp.Key);
             values.Add(kvp.Value);
@@ -36,15 +38,15 @@ public class SerializedDictionary<TKey, TValue> : ISerializationCallbackReceiver
     }
     public void OnAfterDeserialize()
     {
-        _dictionary = new Dictionary<TKey, TValue>();
+        Dictionary = new Dictionary<TKey, TValue>();
         
         for (int i = 0; i < Mathf.Min(keys.Count, values.Count); i++)
         {
-            if (!_dictionary.ContainsKey(keys[i]))
-                _dictionary.Add(keys[i], values[i]);
+            if (!Dictionary.ContainsKey(keys[i]))
+                Dictionary.Add(keys[i], values[i]);
         }
     }
 
-    public IEnumerator<KeyValuePair<TKey, TValue>> GetEnumerator() => _dictionary.GetEnumerator();
+    public IEnumerator<KeyValuePair<TKey, TValue>> GetEnumerator() => Dictionary.GetEnumerator();
     IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
 }

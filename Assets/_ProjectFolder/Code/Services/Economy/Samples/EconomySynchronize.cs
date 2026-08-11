@@ -30,7 +30,7 @@ namespace Unity.Services.Economy
         }
 
         public void OnSignIn() => _ = StartSynchronization();
-        public void OnSignOut() => _economyManager.ClearAllBalances();
+        public void OnSignOut() => _economyManager.ClearBalance();
 
         private async Awaitable StartSynchronization()
         {
@@ -45,8 +45,8 @@ namespace Unity.Services.Economy
             if (_isFlushing || !AuthenticationService.Instance.IsSignedIn) return;
             _isFlushing = true;
             
-            foreach (var pair in _economyManager.Balances)
-                await EconomyService.Instance.PlayerBalances.SetBalanceAsync(pair.Key.ToString(), pair.Value).Response();
+            foreach (var kvp in _economyManager.Balances)
+                await EconomyService.Instance.PlayerBalances.SetBalanceAsync(kvp.Key.ToString(), kvp.Value).Response();
             
             _isFlushing = false;
         }
@@ -54,17 +54,14 @@ namespace Unity.Services.Economy
         {
             await EconomyService.Instance.Configuration.SyncConfigurationAsync();
             var result = await EconomyService.Instance.PlayerBalances.GetBalancesAsync();
- 
-            var resolved = new Dictionary<BalanceType, long>();
+            
             foreach (var balance in result.Balances)
             {
                 if (!Enum.TryParse<BalanceType>(balance.CurrencyId, out var type)) continue;
  
-                long delta = _delta.GetValueOrDefault(type, 0);
-                resolved[type] = balance.Balance + delta;
+                var delta = _delta.GetValueOrDefault(type, 0);
+                _economyManager?.SetBalanceID(type, balance.Balance + delta);
             }
- 
-            _economyManager.ApplyCloudBalances(resolved);
         }
         
         private void OnApplicationPause(bool paused)

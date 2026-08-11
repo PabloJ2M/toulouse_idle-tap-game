@@ -16,38 +16,35 @@ namespace Unity.Services.Economy
         {
             base.Awake();
             saveData.Load(ref balances.Dictionary);
-
-            foreach (var pair in balances)
-                ForceUpdateBalance(pair.Key);
+            OnUpdateBalance();
         }
-        
-        public void ApplyCloudBalances(IReadOnlyDictionary<BalanceType, long> resolvedBalances)
-        {
-            foreach (var pair in resolvedBalances) {
-                balances[pair.Key] = pair.Value;
-                OnBalanceUpdated?.Invoke(pair.Key, pair.Value);
-            }
-            
-            saveData.Save(balances.Dictionary);
-        }
-        public void ClearAllBalances()
-        {
-            foreach (var balance in Balances.Keys)
-                balances[balance] = 0;
- 
-            saveData.Delete();
-        }
-        
-        public void AddBalanceID(BalanceType type, uint amount) => ModifyBalanceID(type, amount);
-        public void RemoveBalanceID(BalanceType type, uint amount) => ModifyBalanceID(type, -amount);
-        private void ForceUpdateBalance(BalanceType type) => OnBalanceUpdated?.Invoke(type, GetBalance(type));
         
         public long GetBalance(BalanceType type) => balances.TryGetValue(type, out var value) ? value : 0;
-        private void ModifyBalanceID(BalanceType type, long amount)
+        public void SetBalanceID(BalanceType type, long amount)
         {
-            balances[type] = GetBalance(type) + amount;
+            balances[type] = amount;
             OnBalanceUpdated?.Invoke(type, balances[type]);
             saveData.Save(balances.Dictionary);
         }
+        public void AddBalanceID(BalanceType type, uint amount) => ModifyBalanceID(type, amount);
+        public void RemoveBalanceID(BalanceType type, uint amount) => ModifyBalanceID(type, -amount);
+        private void ModifyBalanceID(BalanceType type, long amount) => SetBalanceID(type, GetBalance(type) + amount);
+
+        private void OnUpdateBalance()
+        {
+            foreach (var pair in balances)
+                OnUpdateBalance(pair.Key);
+        }
+        private void OnUpdateBalance(BalanceType type) => OnBalanceUpdated?.Invoke(type, GetBalance(type));
+        
+        public void ClearBalance()
+        {
+            foreach (var balance in Balances.Keys)
+                ClearBalance(balance);
+ 
+            saveData.Delete();
+            OnUpdateBalance();
+        }
+        private void ClearBalance(BalanceType type) => balances[type] = 0;
     }
 }

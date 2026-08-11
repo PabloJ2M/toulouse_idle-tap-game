@@ -44,3 +44,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: da09e6e676944319c8486674c4942991, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Services.Authentication::Unity.Services.Authentication.AutomaticSignIn
+  debugging: 1

@@ -7,6 +7,7 @@ namespace Unity.Services.Authentication.PlayerAccounts
     {
         private static readonly Dictionary<AuthProviderType, IAuthProvider> Providers = new()
         {
+            { AuthProviderType.Anonymous, new AnonymousProvider() },
             { AuthProviderType.UnityPlayerAccounts, new UnityPlayerAccountsProvider() },
             { AuthProviderType.GooglePlayGames, new GooglePlayGamesProvider() },
             { AuthProviderType.AppleGameCenter, new AppleGameCenterProvider() },

@@ -2,8 +2,6 @@ using UnityEngine;
 
 namespace Unity.Services.Authentication.PlayerAccounts
 {
-    using PlayerAccounts;
-    
     public class UnityPlayerAccountsProvider : IAuthProvider
     {
         public AuthProviderType Type => AuthProviderType.UnityPlayerAccounts;

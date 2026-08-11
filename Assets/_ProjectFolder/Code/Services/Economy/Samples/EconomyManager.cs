@@ -4,21 +4,18 @@ using UnityEngine;
 
 namespace Unity.Services.Economy
 {
-    public class EconomyManager : SaveLocalData<SerializedDictionary<BalanceType, long>>
+    public class EconomyManager : SingletonBasic<EconomyManager>
     {
         [SerializeField] private SerializedDictionary<BalanceType, long> balances;
-        protected override string LocalDataID => "currency";
-
         public IReadOnlyDictionary<BalanceType, long> Balances => balances.Dictionary;
-        public Func<SerializedDictionary<BalanceType, long>> OnSyncData;
-
-        public static EconomyManager Instance { get; private set; }
+        
+        private readonly SaveDataDictionary<BalanceType, long> saveData = new("currency");
         public static event Action<BalanceType, long> OnBalanceUpdated;
         
-        private void Awake()
+        protected override void Awake()
         {
-            Instance = this;
-            LoadData(ref balances);
+            base.Awake();
+            saveData.Load(ref balances.Dictionary);
 
             foreach (var pair in balances)
                 ForceUpdateBalance(pair.Key);
@@ -31,26 +28,26 @@ namespace Unity.Services.Economy
                 OnBalanceUpdated?.Invoke(pair.Key, pair.Value);
             }
             
-            SaveData(balances);
+            saveData.Save(balances.Dictionary);
         }
         public void ClearAllBalances()
         {
-            foreach (var key in balances.Keys)
-                balances[key] = 0;
+            foreach (var balance in Balances.Keys)
+                balances[balance] = 0;
  
-            DeleteData();
+            saveData.Delete();
         }
         
-        public void ForceUpdateBalance(BalanceType type) => OnBalanceUpdated?.Invoke(type, GetBalance(type));
         public void AddBalanceID(BalanceType type, uint amount) => ModifyBalanceID(type, amount);
         public void RemoveBalanceID(BalanceType type, uint amount) => ModifyBalanceID(type, -amount);
+        private void ForceUpdateBalance(BalanceType type) => OnBalanceUpdated?.Invoke(type, GetBalance(type));
         
         public long GetBalance(BalanceType type) => balances.TryGetValue(type, out var value) ? value : 0;
         private void ModifyBalanceID(BalanceType type, long amount)
         {
             balances[type] = GetBalance(type) + amount;
             OnBalanceUpdated?.Invoke(type, balances[type]);
-            SaveData(balances);
+            saveData.Save(balances.Dictionary);
         }
     }
 }

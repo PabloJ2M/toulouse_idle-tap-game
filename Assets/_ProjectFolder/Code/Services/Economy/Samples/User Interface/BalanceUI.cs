@@ -6,7 +6,7 @@ namespace Unity.Services.Economy
     public class BalanceUI : MonoBehaviour
     {
         [SerializeField] private TextMeshProUGUI textUI;
-        [SerializeField] private BalanceType balanceID = BalanceType.COIN;
+        [SerializeField] private BalanceType balanceID = BalanceType.GOLD;
 
         private void OnEnable()
         {

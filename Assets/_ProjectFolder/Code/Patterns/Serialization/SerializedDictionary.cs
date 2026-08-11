@@ -8,10 +8,11 @@ public class SerializedDictionary<TKey, TValue> : ISerializationCallbackReceiver
     [SerializeField] private List<TKey> keys = new();
     [SerializeField] private List<TValue> values = new();
 
-    public Dictionary<TKey, TValue> Dictionary { get; private set; } = new();
+    public Dictionary<TKey, TValue> Dictionary = new();
+
+    public int Count => Dictionary.Count;
     public List<TKey> Keys => keys;
     public List<TValue> Values => values;
-    public int Count => Dictionary.Count;
 
     public TValue this[TKey key]
     {
@@ -38,7 +39,7 @@ public class SerializedDictionary<TKey, TValue> : ISerializationCallbackReceiver
     }
     public void OnAfterDeserialize()
     {
-        Dictionary = new Dictionary<TKey, TValue>();
+        Dictionary.Clear();
         
         for (int i = 0; i < Mathf.Min(keys.Count, values.Count); i++)
         {

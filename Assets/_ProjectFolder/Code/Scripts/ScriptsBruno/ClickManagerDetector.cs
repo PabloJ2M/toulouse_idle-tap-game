@@ -34,6 +34,6 @@ public class ClickManagerDetector : MonoBehaviour // script general para detecta
         if (obj != null) clickable = obj.GetComponent<IClickable>();
         else return;
 
-        clickable.click();
+        clickable?.click();
     }
 }

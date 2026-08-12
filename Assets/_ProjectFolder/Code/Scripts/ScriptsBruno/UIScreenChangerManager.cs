@@ -3,12 +3,13 @@ using UnityEngine;
 public class UIScreenChangerManager : SingletonBasic<UIScreenChangerManager>
 {
     [SerializeField] ScreenChanger[] screens;
-    public void EnableScreen(GameObject screen) => UpdateScreen(screen);    
-    private void UpdateScreen(GameObject newScreen) 
+    private void Start() => EnableScreen(screens[0]);
+    public void EnableScreen(ScreenChanger screen) => UpdateScreen(screen);    
+    private void UpdateScreen(ScreenChanger newScreen) 
     {
         foreach (var screen in screens)
-            screen.GetScreen.SetActive(false);
+            screen.DeactiveScreen();
 
-        newScreen.SetActive(true);
+        newScreen.ActiveScreen();
     }
 }

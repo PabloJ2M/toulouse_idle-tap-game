@@ -9,15 +9,17 @@ public class ScreenChanger : MonoBehaviour
     [SerializeField] Color ButtonDeselected;
 
     [Header("Screen")]
-    [SerializeField] private GameObject screen;
-    [HideInInspector] public GameObject GetScreen { private set; get; }
-    private void Start() => GetScreen = screen;
-    
-    public void EnableScreen() => UIScreenChangerManager.Instance.EnableScreen(screen);
+    [SerializeField] private GameObject screen;    
+    public void EnableScreen() => UIScreenChangerManager.Instance.EnableScreen(this);
     public void DeactiveScreen() 
     {
         buttonImage.color = ButtonDeselected;
         screen.SetActive(false);
+    }
+    public void ActiveScreen() 
+    {
+        buttonImage.color = buttonSelected;
+        screen.SetActive(true);
     }
     
 }

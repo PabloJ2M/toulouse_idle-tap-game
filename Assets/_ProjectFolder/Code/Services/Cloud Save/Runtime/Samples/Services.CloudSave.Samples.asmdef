@@ -1,0 +1,20 @@
+{
+    "name": "Services.CloudSave.Samples",
+    "rootNamespace": "Unity.Services.CloudSave",
+    "references": [
+        "GUID:5540e30183c82e84b954c033c388e06c",
+        "GUID:be0d2672886cc45b2bcea5a5053a5347",
+        "GUID:362de69ccaec31d4db977285166685f9",
+        "GUID:55441f185f4707a27b94101da9a62b25",
+        "GUID:0b169244d8d7d81b091d03e94b06df00"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

@@ -13,13 +13,17 @@ namespace Unity.Services.Authentication.PlayerAccounts
         
         private async Awaitable SignInAsync()
         {
+            if (debugging) {
+                await SignInAsync(AuthProviderType.Anonymous);
+                return;
+            }
+            
             #if UNITY_ANDROID && !UNITY_EDITOR
             await SignInAsync(AuthProviderType.GooglePlayGames);
             #elif UNITY_IOS && !UNITY_EDITOR
             await SignInAsync(AuthProviderType.AppleGameCenter);
             #else
-            if (debugging) await SignInAsync(AuthProviderType.Anonymous);
-            else await SignInAsync(AuthProviderType.UnityPlayerAccounts);
+            await SignInAsync(AuthProviderType.UnityPlayerAccounts);
             #endif
         }
         private static async Awaitable SignInAsync(AuthProviderType type)

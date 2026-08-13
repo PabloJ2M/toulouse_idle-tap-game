@@ -10,14 +10,14 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 14f13b9f56dd19d4897994ce885c2a04, type: 3}
-  m_Name: Test
+  m_Name: OROxTAP
   m_EditorClassIdentifier: Assembly-CSharp::SoUpgradeSlots
-  naime: AutoClicker
+  naime: ORO X TAP
   upgradesDetails: example
-  baseStat: 0
-  totalStat: 0
-  basePrice: 150
-  totalPrice: 150
-  growthRate: 1.15
+  baseStat: 10
+  totalStat: 10
+  basePrice: 20
+  totalPrice: 20
+  growthRate: 1.13
   increment: 10
   Icon: {fileID: 0}

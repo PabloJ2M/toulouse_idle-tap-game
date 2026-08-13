@@ -5,5 +5,5 @@ using UnityEngine;
 public class ChestDetection : SingletonBasic<ChestDetection>, IClickable
 {
     [SerializeField] private EconomyModifier goldModifier;
-    public void click() => goldModifier.Add(100);
+    public void click() => goldModifier.Add((uint)ChestUpgradeManager.Instance.GetStatByID(SlotPriceType.Cash));
 }

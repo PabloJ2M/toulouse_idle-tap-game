@@ -6,6 +6,8 @@ namespace Unity.Services.CloudSave
 {
     using Authentication.Components;
     using Models;
+    using Models.Data.Player;
+    using CloudSaveOptions = Models.Data.Player.SaveOptions;
 
     [RequireComponent(typeof(AuthEventHandler))]
     public class CloudSaveManager : SingletonBasic<CloudSaveManager>, IAuthEvents
@@ -32,19 +34,26 @@ namespace Unity.Services.CloudSave
 
         private async Awaitable SyncCloudData()
         {
-            if (_lastSyncedModified.Count == 0)
-                await LoadAllDataAsync().Response();
-            else
-                await LoadChangedDataAsync().Response();
+            // if (_lastSyncedModified.Count == 0) {
+            //     await LoadAllDataAsync().Response();
+            //     return;
+            // }
+            
+            await LoadChangedDataAsync().Response();
+            await LoadChangedDataAsync(new PublicReadAccessClassOptions()).Response();
         }
+
         private async Awaitable LoadAllDataAsync()
         {
             var dictionary = await CloudSaveService.Instance.Data.Player.LoadAllAsync();
             DispatchPlayerData(dictionary);
         }
-        private async Awaitable LoadChangedDataAsync()
+        private async Awaitable LoadChangedDataAsync(PublicReadAccessClassOptions options = null)
         {
-            var keyList = await CloudSaveService.Instance.Data.Player.ListAllKeysAsync();
+            var keyList = options == null
+                ? await CloudSaveService.Instance.Data.Player.ListAllKeysAsync()
+                : await CloudSaveService.Instance.Data.Player.ListAllKeysAsync(new ListAllKeysOptions(options));
+            
             var changedKeys = new HashSet<string>();
             
             foreach (var itemKey in keyList) {
@@ -53,13 +62,21 @@ namespace Unity.Services.CloudSave
             }
             
             if (changedKeys.Count != 0)
-                await LoadKeysDataAsync(changedKeys);
+                await LoadKeysDataAsync(changedKeys, options);
         }
-        private async Awaitable LoadKeysDataAsync(ISet<string> keys)
+        private async Awaitable LoadKeysDataAsync(ISet<string> keys, PublicReadAccessClassOptions options = null)
         {
-            var dictionary = await CloudSaveService.Instance.Data.Player.LoadAsync(keys);
+            var dictionary = options == null
+                ? await CloudSaveService.Instance.Data.Player.LoadAsync(keys)
+                : await CloudSaveService.Instance.Data.Player.LoadAsync(keys, new LoadOptions(options));
+            
             DispatchPlayerData(dictionary);
         }
+        
+        // public static async Awaitable<Dictionary<string, Item>> LoadAllPlayerDataAsync(string playerId) =>
+        //     await CloudSaveService.Instance.Data.Player.LoadAllAsync(new LoadAllOptions(new PublicReadAccessClassOptions(playerId))());
+        public static async Awaitable<Dictionary<string, Item>> LoadPlayerDataAsync(string playerId, ISet<string> keys) =>
+            await CloudSaveService.Instance.Data.Player.LoadAsync(keys, new LoadOptions(new PublicReadAccessClassOptions(playerId)));
 
         private void DispatchPlayerData(Dictionary<string, Item> dictionary)
         {
@@ -71,11 +88,18 @@ namespace Unity.Services.CloudSave
             if (dictionary.Count > 0)
                 _syncState.Save(_lastSyncedModified);
         }
-        
-        public static async Awaitable SaveDataAsync(Dictionary<string, object> payload) =>
-            await CloudSaveService.Instance.Data.Player.SaveAsync(payload);
-        
-        public static async Awaitable SaveDataAsync(string key, object value) =>
-            await SaveDataAsync(new Dictionary<string, object> { { key, value } });
+
+        public static async Awaitable SaveDataAsync(string key, object value, CloudSaveAccess access = CloudSaveAccess.Private)
+        {
+            var payload = new Dictionary<string, object> { { key, value } };
+            await SaveDataAsync(payload, access);
+        }
+        public static async Awaitable SaveDataAsync(Dictionary<string, object> payload, CloudSaveAccess access = CloudSaveAccess.Private)
+        {
+            if (access == CloudSaveAccess.Private)
+                await CloudSaveService.Instance.Data.Player.SaveAsync(payload);
+            else
+                await CloudSaveService.Instance.Data.Player.SaveAsync(payload, new CloudSaveOptions(new PublicWriteAccessClassOptions()));
+        }
     }
 }

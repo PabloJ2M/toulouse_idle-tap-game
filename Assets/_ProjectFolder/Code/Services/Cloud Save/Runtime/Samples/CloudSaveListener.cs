@@ -7,6 +7,7 @@ namespace Unity.Services.CloudSave
     public abstract class CloudSaveListener : MonoBehaviour
     {
         [SerializeField] protected string dataID;
+        [SerializeField] protected CloudSaveAccess access;
         
         private CloudSaveManager _saveManager;
 

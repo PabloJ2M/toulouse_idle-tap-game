@@ -387,7 +387,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 78923212}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1104233435}
+        m_TargetAssemblyTypeName: UpgradeSlot, Assembly-CSharp
+        m_MethodName: PayPrice
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &78923212
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1478,7 +1490,7 @@ MonoBehaviour:
   m_HandleRect: {fileID: 1697064153}
   m_Direction: 2
   m_Value: 1
-  m_Size: 0.85625
+  m_Size: 0.830303
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -1867,6 +1879,63 @@ RectTransform:
   m_AnchoredPosition: {x: -581, y: 0}
   m_SizeDelta: {x: 548.01, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!1 &502407626
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 502407628}
+  - component: {fileID: 502407627}
+  m_Layer: 0
+  m_Name: GameObject
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &502407627
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 502407626}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bba038e19df690a44a1085e33ddb34ec, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ChestUpgradeManager
+  chestUpgrades:
+  - naime: Autoclicker
+    upgradesDetails: example
+    baseStat: 0
+    totalStat: 0
+    basePrice: 150
+    totalPrice: 150
+    level: 0
+    baseIncrement: 1
+    totalIncrement: 0
+    priceType: 0
+    valueType: 1
+    Icon: {fileID: 0}
+--- !u!4 &502407628
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 502407626}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -0.05246, y: -0.09537, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &543363086
 GameObject:
   m_ObjectHideFlags: 0
@@ -4218,6 +4287,7 @@ GameObject:
   - component: {fileID: 1104233432}
   - component: {fileID: 1104233434}
   - component: {fileID: 1104233433}
+  - component: {fileID: 1104233435}
   m_Layer: 5
   m_Name: Update_Slot_Prefab
   m_TagString: Untagged
@@ -4285,6 +4355,23 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1104233431}
   m_CullTransparentMesh: 1
+--- !u!114 &1104233435
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1104233431}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 77711aea1266e014b930ed584c289f0e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::UpgradeSlot
+  data: {fileID: 11400000, guid: c949a24c90676b84895ce36d384ff20f, type: 2}
+  priceID: 0
+  image: {fileID: 0}
+  slotName: {fileID: 269887440}
+  slotPrice: {fileID: 917961632}
 --- !u!1001 &1139816024
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -5984,7 +6071,7 @@ MonoBehaviour:
     m_Top: 450
     m_Bottom: 0
   m_ChildAlignment: 0
-  m_Spacing: 50
+  m_Spacing: 60
   m_ChildForceExpandWidth: 1
   m_ChildForceExpandHeight: 1
   m_ChildControlWidth: 0
@@ -6732,3 +6819,4 @@ SceneRoots:
   - {fileID: 785824284}
   - {fileID: 559817819}
   - {fileID: 1139816024}
+  - {fileID: 502407628}

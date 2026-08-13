@@ -14,7 +14,6 @@ namespace Unity.Services.Economy
             OnUpdateBalance(balanceID, EconomyManager.Instance.GetBalance(balanceID));
         }
         private void OnDisable() => EconomyManager.OnBalanceUpdated -= OnUpdateBalance;
-
         private void OnUpdateBalance(BalanceType type, long amount)
         {
             if (type == balanceID)

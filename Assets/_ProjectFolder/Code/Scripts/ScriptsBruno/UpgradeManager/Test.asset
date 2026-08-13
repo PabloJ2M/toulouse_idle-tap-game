@@ -18,9 +18,6 @@ MonoBehaviour:
   totalStat: 0
   basePrice: 150
   totalPrice: 150
-  level: 0
-  baseIncrement: 1
-  totalIncrement: 0
-  priceType: 0
-  valueType: 1
+  growthRate: 1.15
+  increment: 10
   Icon: {fileID: 0}

@@ -1,6 +1,5 @@
 using System;
 using UnityEngine;
-using UnityEngine.UI;
 [Serializable]
 public class UpgradeSlotDetails
 {
@@ -8,15 +7,24 @@ public class UpgradeSlotDetails
     public string upgradesDetails;
 
     public long baseStat;
-    public long totalStat;
+    public float totalStat;
     public long basePrice;
-    public long totalPrice;
+    public float totalPrice;
 
-    public int level;
-    public int baseIncrement;
-    public int totalIncrement;
+    public float growthRate;
+    public int increment;
 
-    public SlotPriceType priceType;
-    public UpgradeStatType valueType;
-    public Sprite Icon; 
+    public Sprite Icon;
+    public void InitializeVariables(SoUpgradeSlots data)
+    {
+        naime = data.naime;
+        upgradesDetails = data.upgradesDetails;
+        baseStat = data.baseStat;
+        totalStat = data.totalStat;
+        basePrice = data.basePrice;
+        totalPrice = data.totalPrice;
+        increment = data.increment;
+        Icon = data.Icon;
+        growthRate = data.growthRate;
+    }
 }

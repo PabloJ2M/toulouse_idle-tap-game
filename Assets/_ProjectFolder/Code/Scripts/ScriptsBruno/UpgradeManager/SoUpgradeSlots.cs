@@ -7,15 +7,12 @@ public class SoUpgradeSlots : ScriptableObject
     public string upgradesDetails;
 
     public long baseStat;
-    public long totalStat;
+    public float totalStat;
     public long basePrice;
-    public long totalPrice;
+    public float totalPrice;
 
-    public int level;
-    public int baseIncrement;
-    public int totalIncrement;
+    public float growthRate;
+    public int increment;
 
-    public SlotPriceType priceType;
-    public UpgradeStatType valueType;
     public Sprite Icon;
 }

@@ -6,7 +6,7 @@ public static class IncrementalStat
     {
         var level = slot.level + 1;
         slot.totalStat = slot.baseStat + (slot.baseIncrement * level);
-        slot.totalPrice = slot.basePrice * (long)Mathf.Pow(1.2f, level);
+        slot.totalPrice = slot.basePrice * (long)Mathf.Pow(2f, level);
         slot.level++;
     }
     public static void LevelDown(UpgradeSlotDetails slot)

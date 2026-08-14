@@ -15,7 +15,7 @@ MonoBehaviour:
   naime: AutoClicker
   upgradesDetails: example
   baseStat: 10
-  totalStat: 10
+  totalStat: 130
   basePrice: 150
   totalPrice: 150
   growthRate: 1.15

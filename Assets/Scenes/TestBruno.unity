@@ -1111,17 +1111,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 77711aea1266e014b930ed584c289f0e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::UpgradeSlot
-  data: {fileID: 11400000, guid: 0e21e902245a0c640b8f8be044169f0c, type: 2}
-  slot:
-    naime: 
-    upgradesDetails: 
-    baseStat: 0
-    totalStat: 0
-    basePrice: 0
-    totalPrice: 0
-    growthRate: 0
-    increment: 0
-    Icon: {fileID: 0}
   priceID: 2
   image: {fileID: 0}
   slotName: {fileID: 222132799}
@@ -1864,17 +1853,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ChestUpgradeManager
   upgradesLevelSaves:
-    keys: 050000000400000003000000020000000100000000000000
-    values: 000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
-  statsSaves:
-    keys: 050000000400000003000000020000000100000000000000
+    keys: 020000000100000000000000
+    values: 000000000000000000000000000000000000000000000000
+  data:
+    keys: 020000000100000000000000
     values:
-    - 0
-    - 0
-    - 0
-    - 0
-    - 0
-    - 0
+    - {fileID: 11400000, guid: 0e21e902245a0c640b8f8be044169f0c, type: 2}
+    - {fileID: 11400000, guid: c6c8245d89b05df439927977c376de99, type: 2}
+    - {fileID: 11400000, guid: c949a24c90676b84895ce36d384ff20f, type: 2}
 --- !u!4 &502407628
 Transform:
   m_ObjectHideFlags: 0
@@ -4057,17 +4043,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 77711aea1266e014b930ed584c289f0e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::UpgradeSlot
-  data: {fileID: 11400000, guid: c949a24c90676b84895ce36d384ff20f, type: 2}
-  slot:
-    naime: 
-    upgradesDetails: 
-    baseStat: 0
-    totalStat: 0
-    basePrice: 0
-    totalPrice: 0
-    growthRate: 0
-    increment: 0
-    Icon: {fileID: 0}
   priceID: 0
   image: {fileID: 0}
   slotName: {fileID: 269887440}
@@ -6042,17 +6017,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 77711aea1266e014b930ed584c289f0e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::UpgradeSlot
-  data: {fileID: 11400000, guid: c6c8245d89b05df439927977c376de99, type: 2}
-  slot:
-    naime: 
-    upgradesDetails: 
-    baseStat: 0
-    totalStat: 0
-    basePrice: 0
-    totalPrice: 0
-    growthRate: 0
-    increment: 0
-    Icon: {fileID: 0}
   priceID: 1
   image: {fileID: 0}
   slotName: {fileID: 754037695}

@@ -15,7 +15,7 @@ MonoBehaviour:
   naime: ORO X TAP
   upgradesDetails: example
   baseStat: 10
-  totalStat: 10
+  totalStat: 100
   basePrice: 20
   totalPrice: 20
   growthRate: 1.13

@@ -20,7 +20,7 @@ public class ClickManagerDetector : MonoBehaviour // script general para detecta
         test.performed -= TestInput;
         control.Disable();
     }
-    private void TestInput(InputAction.CallbackContext ctx) => ChestUpgradeManager.Instance.ClearUpgrades();    
+    private void TestInput(InputAction.CallbackContext ctx) => SlotUpgradeManager.Instance.ClearUpgrades();    
     private void DetectInput(InputAction.CallbackContext ctx) // ahora si funciona :)
     {        
         Vector2 position = Vector2.zero;

@@ -6,7 +6,7 @@ using UnityEngine.UI;
 
 public class UpgradeSlot : MonoBehaviour
 {
-    [SerializeField] private SlotPriceType priceID;
+    [SerializeField] private SlotID priceID;
 
     [Header("Prefab details")]
     [SerializeField] private Image image;
@@ -15,11 +15,11 @@ public class UpgradeSlot : MonoBehaviour
 
     private void OnEnable()
     {
-        ChestUpgradeManager.OnChestUpgradesUpdated += UpdateUI;        
-        ChestUpgradeManager.Instance.UpdateLevel(priceID);
+        SlotUpgradeManager.OnChestUpgradesUpdated += UpdateUI;        
+        SlotUpgradeManager.Instance.UpdateLevel(priceID);
     }
-    private void OnDisable() => ChestUpgradeManager.OnChestUpgradesUpdated -= UpdateUI;
-    private void UpdateUI(SlotPriceType type, SoUpgradeSlots slot, float amount) 
+    private void OnDisable() => SlotUpgradeManager.OnChestUpgradesUpdated -= UpdateUI;
+    private void UpdateUI(SlotID type, SoUpgradeSlots slot, float amount) 
     {
         if (type == priceID)
         {
@@ -27,5 +27,5 @@ public class UpgradeSlot : MonoBehaviour
             slotPrice.SetText(amount.ToString());
         }
     }
-    public void PayPrice() => ChestUpgradeManager.Instance.LevelUpChest(priceID);
+    public void PayPrice() => SlotUpgradeManager.Instance.LevelUpChest(priceID);
 }

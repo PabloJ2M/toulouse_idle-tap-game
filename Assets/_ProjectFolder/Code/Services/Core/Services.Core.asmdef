@@ -1,0 +1,19 @@
+{
+    "name": "Services.Core",
+    "rootNamespace": "Unity.Services.Core",
+    "references": [
+        "Unity.Services.Core",
+        "Unity.Services.Core.Components",
+        "Unity.Services.Authentication",
+        "Unity.Patterns"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

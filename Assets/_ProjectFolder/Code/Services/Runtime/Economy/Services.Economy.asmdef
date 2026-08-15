@@ -1,0 +1,18 @@
+{
+    "name": "Services.Economy",
+    "rootNamespace": "Unity.Services.Economy",
+    "references": [
+        "GUID:fe25561d224ed4743af4c60938a59d0b",
+        "GUID:883598a1d14d64bda9d1d6e183355ea9",
+        "GUID:d691c18f81872be3eb4278dabe3b57e6"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

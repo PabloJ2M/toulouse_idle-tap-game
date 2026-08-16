@@ -5,7 +5,7 @@ using UnityEngine;
 namespace Unity.Services.CloudSave
 {
     using Core;
-    using Models.Data.Player;
+    using PublicRead = Models.Data.Player.PublicReadAccessClassOptions;
     
     public abstract class CloudSaveModule : MonoBehaviour, IServiceAuthModule
     {
@@ -14,19 +14,21 @@ namespace Unity.Services.CloudSave
         public virtual void OnUserSignedIn(string playerID) => _service = CloudSaveService.Instance;
         public abstract void OnUserSignedOut();
         
-        protected static async Awaitable LoadAllDataAsync(Action<ItemsWrapper> onLoadData, PublicReadAccessClassOptions options = null)
+        protected static async Awaitable LoadDataAsync(ISet<string> keys, Action<ItemsWrapper> onDataLoaded, PublicRead options = null)
         {
             if (!ServicesStatus.IsSignedIn) return;
             
-            var dictionary = await _service.LoadAll(options) as ItemsWrapper;
-            onLoadData(dictionary);
+            var wrapper = await _service.Load(keys, options);
+            if (wrapper != null)
+                onDataLoaded(wrapper);
         }
-        protected static async Awaitable LoadDataAsync(ISet<string> keys, Action<ItemsWrapper> onLoadData, PublicReadAccessClassOptions options = null)
+        protected static async Awaitable LoadAllDataAsync(Action<ItemsWrapper> onDataLoaded, PublicRead options = null)
         {
             if (!ServicesStatus.IsSignedIn) return;
             
-            var dictionary = await _service.Load(keys, options) as ItemsWrapper;
-            onLoadData(dictionary);
+            var wrapper = await _service.LoadAll(options);
+            if (wrapper != null)
+                onDataLoaded(wrapper);
         }
         
         public static async Awaitable SaveAsync(Payload payload, SaveAccessType accessType = SaveAccessType.Private)

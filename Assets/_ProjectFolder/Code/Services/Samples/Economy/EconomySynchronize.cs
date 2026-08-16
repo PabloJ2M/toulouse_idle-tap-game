@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace Unity.Services.Economy
+namespace Unity.Services.Economy.Samples
 {
     using Core;
     
@@ -36,7 +36,7 @@ namespace Unity.Services.Economy
             foreach (var kvp in _economyManager.Balances)
                 Snapshot[kvp.Key] = kvp.Value;
  
-            await Load(_economyManager.SetBalanceID).Response();
+            await Load(_economyManager.SetBalanceID);
         }
         
         private void OnApplicationPause(bool paused)

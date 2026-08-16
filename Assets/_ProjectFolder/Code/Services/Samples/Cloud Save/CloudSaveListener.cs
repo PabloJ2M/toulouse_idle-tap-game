@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace Unity.Services.CloudSave
+namespace Unity.Services.CloudSave.Samples
 {
     using Models;
     

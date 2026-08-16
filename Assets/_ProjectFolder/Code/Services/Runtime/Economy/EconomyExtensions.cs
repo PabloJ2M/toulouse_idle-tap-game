@@ -7,21 +7,21 @@ namespace Unity.Services.Economy
     
     public static class EconomyExtensions
     {
-        private static async Awaitable<bool> Response(this Task action)
+        private static async Awaitable<T> Response<T>(this Task<T> action) where T : class
         {
-            try { await action; return true; }
+            try { return await action; }
             catch (EconomyValidationException e) { Debug.LogError(e); }
             catch (EconomyRateLimitedException e) { Debug.LogError(e); }
             catch (EconomyException e) { Debug.LogError(e); }
-            return false;
+            return null;
         }
-        public static async Awaitable<bool> Response(this Awaitable action)
+        public static async Awaitable<T> Response<T>(this Awaitable<T> action) where T : class
         {
-            try { await action; return true; }
+            try { return await action; }
             catch (EconomyValidationException e) { Debug.LogError(e); }
             catch (EconomyRateLimitedException e) { Debug.LogError(e); }
             catch (EconomyException e) { Debug.LogError(e); }
-            return false;
+            return null;
         }
 
         public static async Awaitable SyncConfiguration(this IEconomyService service) =>
@@ -30,7 +30,7 @@ namespace Unity.Services.Economy
         public static async Awaitable<GetBalancesResult> GetBalances(this IEconomyService service) =>
             await service.PlayerBalances.GetBalancesAsync();
         
-        public static async Awaitable<bool> SetBalance(this IEconomyService service, BalanceType balance, long amount) =>
+        public static async Awaitable<PlayerBalance> SetBalance(this IEconomyService service, BalanceType balance, long amount) =>
             await service.PlayerBalances.SetBalanceAsync(balance.ToString(), amount).Response();
         
         private static readonly string[] Suffixes = { "", "K", "M", "B", "T" };

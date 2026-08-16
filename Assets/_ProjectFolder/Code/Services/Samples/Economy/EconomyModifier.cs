@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace Unity.Services.Economy
+namespace Unity.Services.Economy.Samples
 {
     public class EconomyModifier : MonoBehaviour
     {

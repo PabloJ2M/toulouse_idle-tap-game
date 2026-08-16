@@ -1,11 +1,11 @@
 {
     "name": "Services.Economy.Samples.UI",
-    "rootNamespace": "",
+    "rootNamespace": "Unity.Services.Economy.Samples.UI",
     "references": [
+        "GUID:d691c18f81872be3eb4278dabe3b57e6",
         "GUID:20a139b9cc4fb133ebd2ce1c08523ff4",
         "GUID:8731285bcb70543efb424a002285420b",
-        "GUID:6055be8ebefd69e48b49212b09b47b2f",
-        "GUID:362de69ccaec31d4db977285166685f9"
+        "GUID:6055be8ebefd69e48b49212b09b47b2f"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],

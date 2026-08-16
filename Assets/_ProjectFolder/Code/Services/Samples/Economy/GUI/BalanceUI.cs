@@ -1,7 +1,7 @@
 using UnityEngine;
 using TMPro;
 
-namespace Unity.Services.Economy
+namespace Unity.Services.Economy.Samples.UI
 {
     public class BalanceUI : MonoBehaviour
     {

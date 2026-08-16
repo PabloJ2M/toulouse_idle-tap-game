@@ -40,13 +40,13 @@ namespace Unity.Services.Economy
             if (_isSaving || DirtyBalances.Count == 0 || !ServicesStatus.IsSignedIn) return;
             _isSaving = true;
             
-            var toFlush = new List<BalanceType>(DirtyBalances);
+            var balances = new List<BalanceType>(DirtyBalances);
             DirtyBalances.Clear();
 
-            foreach (var balance in toFlush) {
-                var success = await _service.SetBalance(balance, Current.GetValueOrDefault(balance, 0));
+            foreach (var balance in balances) {
+                var playerBalance = await _service.SetBalance(balance, Current.GetValueOrDefault(balance, 0));
                 
-                if (!success)
+                if (playerBalance == null)
                     DirtyBalances.Add(balance);
             }
             

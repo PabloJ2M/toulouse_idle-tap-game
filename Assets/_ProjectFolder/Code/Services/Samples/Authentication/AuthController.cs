@@ -1,14 +1,15 @@
-using Unity.Services.Core;
 using UnityEngine;
 
-namespace Unity.Services.Authentication.PlayerAccounts
+namespace Unity.Services.Authentication.Samples
 {
-    public class AuthController : SingletonBasic<AuthController>, IServiceModule
+    using Core;
+    using PlayerAccounts;
+    
+    public class AuthController : ServicesStatic<AuthController>, IServiceModule
     {
         [SerializeField] private bool debugging = false;
 
-        public void OnInitialized() => SignIn();
-        
+        public void OnInitialized() => _ = SignInAsync();
         public void SignIn() => _ = SignInAsync();
         public void SignIn(ProviderType type) => _ = SignInAsync(type);
         

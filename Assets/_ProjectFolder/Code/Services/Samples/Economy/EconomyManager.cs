@@ -2,9 +2,11 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Unity.Services.Economy
+namespace Unity.Services.Economy.Samples
 {
-    public class EconomyManager : SingletonBasic<EconomyManager>
+    using Core;
+    
+    public class EconomyManager : ServicesStatic<EconomyManager>
     {
         [SerializeField] private SerializedDictionary<BalanceType, long> balances;
         public IReadOnlyDictionary<BalanceType, long> Balances => balances.Dictionary;

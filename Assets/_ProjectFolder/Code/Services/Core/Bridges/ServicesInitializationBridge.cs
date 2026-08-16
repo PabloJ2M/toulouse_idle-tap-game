@@ -6,14 +6,13 @@ namespace Unity.Services.Core
     
     [RequireComponent(typeof(ServicesInitialization))]
     [AddComponentMenu("Services/Services Initialization Bridge")]
-    public class ServicesInitializationBridge : Singleton<ServicesInitializationBridge>
+    public class ServicesInitializationBridge : MonoBehaviour
     {
         private ServicesInitialization _initialization;
         private IServiceModule[] _services;
 
-        protected override void Awake()
+        private void Awake()
         {
-            base.Awake();
             _initialization = GetComponent<ServicesInitialization>();
             _services = GetComponentsInChildren<IServiceModule>();
         }

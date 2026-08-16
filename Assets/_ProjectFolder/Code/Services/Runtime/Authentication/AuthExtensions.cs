@@ -15,7 +15,6 @@ namespace Unity.Services.Authentication.PlayerAccounts
             catch (PlayerAccountsException ex) { Debug.LogError(ex); return AuthResult.Fail(AuthResultCode.Cancelled, ex.Message); }
             catch (RequestFailedException ex) { Debug.LogError(ex); return AuthResult.Fail(AuthResultCode.NoConnection, ex.Message); }
         }
- 
         public static async Awaitable<AuthResult> Response(this Awaitable action)
         {
             try { await action; return AuthResult.Ok(); }

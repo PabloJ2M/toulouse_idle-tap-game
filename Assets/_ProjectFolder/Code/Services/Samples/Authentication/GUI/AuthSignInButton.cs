@@ -1,8 +1,10 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace Unity.Services.Authentication.PlayerAccounts
+namespace Unity.Services.Authentication.Samples
 {
+    using PlayerAccounts;
+    
     public class AuthSignInButton : MonoBehaviour
     {
         [SerializeField] private ProviderType provider;

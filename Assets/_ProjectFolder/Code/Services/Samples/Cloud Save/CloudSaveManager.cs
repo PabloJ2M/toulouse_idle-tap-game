@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Unity.Services.CloudSave
+namespace Unity.Services.CloudSave.Samples
 {
     using Models;
     using Models.Data.Player;
@@ -31,12 +31,14 @@ namespace Unity.Services.CloudSave
 
         private async Awaitable SyncCloudData()
         {
-            await LoadChangedDataAsync().Response();
-            await LoadChangedDataAsync(CloudSaveExtensions.PublicRead).Response();
+            await LoadChangedDataAsync();
+            await LoadChangedDataAsync(CloudSaveExtensions.PublicRead);
         }
         private async Awaitable LoadChangedDataAsync(PublicReadAccessClassOptions options = null)
         {
             var keyList = await CloudSaveService.Instance.LoadKeys(options);
+            if (keyList == null) return;
+            
             var changedKeys = new HashSet<string>();
             
             foreach (var itemKey in keyList) {

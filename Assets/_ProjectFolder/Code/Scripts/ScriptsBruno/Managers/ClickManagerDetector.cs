@@ -25,13 +25,9 @@ public class ClickManagerDetector : MonoBehaviour // script general para detecta
     {        
         Vector2 position = Vector2.zero;
         if (Touchscreen.current != null && Touchscreen.current.primaryTouch.press.isPressed)
-        {
             position = Touchscreen.current.primaryTouch.position.ReadValue();
-        }
         else 
-        {
             position = Mouse.current.position.ReadValue();
-        }
 
         var obj = InputUtils.GetTopUIElement(position);
         IClickable clickable = null;

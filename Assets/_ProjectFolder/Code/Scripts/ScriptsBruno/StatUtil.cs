@@ -5,5 +5,5 @@ using UnityEngine;
 public class StatUtil : SingletonBasic<StatUtil>
 {
     [SerializeField] private EconomyModifier gold;
-    public void AddGold(SlotID ID) => gold.Add((uint)SlotUpgradeManager.Instance.GetStatByID(ID));
+    public void AddGold(SlotID ID) => gold.Add((uint)SlotUpgradeManager.Instance.GetStat(ID));
 }

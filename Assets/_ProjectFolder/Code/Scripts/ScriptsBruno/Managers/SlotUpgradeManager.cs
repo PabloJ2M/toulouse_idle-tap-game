@@ -15,7 +15,8 @@ public class SlotUpgradeManager : SingletonBasic<SlotUpgradeManager>{
         base.Awake();
         saveData.Load(ref upgradesLevelSaves.Dictionary);
     }
-    public float GetStatByID(SlotID slotID) => GetStat(slotID);
+    public float GetStat(SlotID slotID) => GetStatByID(slotID);
+    public float GetPrice(SlotID slotID) => GetPriceByID(slotID);
     public void SetUpgradeID(SlotID slotID, long level) 
     {
         upgradesLevelSaves[slotID] = level;
@@ -51,7 +52,7 @@ public class SlotUpgradeManager : SingletonBasic<SlotUpgradeManager>{
         }
         else print("No hay dinero suficiente");
     }
-    private uint GetStat(SlotID slotID) 
+    private uint GetStatByID(SlotID slotID) 
     {
         switch (data[slotID].statType)
         {
@@ -60,5 +61,6 @@ public class SlotUpgradeManager : SingletonBasic<SlotUpgradeManager>{
         }
         return 0;
     }
+    private uint GetPriceByID(SlotID slotID) => (uint)IncrementalStat.GetTotalPrice(data[slotID], upgradesLevelSaves[slotID]);
     public void UpdateLevel(SlotID priceID) => OnChestUpgradesUpdated?.Invoke(priceID, data[priceID], IncrementalStat.GetTotalPrice(data[priceID], upgradesLevelSaves[priceID]));    
 }

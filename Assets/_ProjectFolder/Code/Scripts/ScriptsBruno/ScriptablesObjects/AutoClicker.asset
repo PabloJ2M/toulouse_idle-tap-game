@@ -13,11 +13,11 @@ MonoBehaviour:
   m_Name: AutoClicker
   m_EditorClassIdentifier: Assembly-CSharp::SoUpgradeSlots
   naime: AutoClicker
-  upgradesDetails: example
+  startDetails: 
+  finalDetails: /s
   baseStat: 10
-  totalStat: 130
   basePrice: 150
-  totalPrice: 150
+  statType: 0
   growthRate: 1.15
   increment: 10
   Icon: {fileID: 0}

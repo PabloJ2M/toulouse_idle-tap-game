@@ -13,7 +13,8 @@ MonoBehaviour:
   m_Name: Defense
   m_EditorClassIdentifier: Assembly-CSharp::SoUpgradeSlots
   naime: Defense
-  upgradesDetails: example
+  startDetails: +
+  finalDetails: '%'
   baseStat: 1
   basePrice: 100
   statType: 1

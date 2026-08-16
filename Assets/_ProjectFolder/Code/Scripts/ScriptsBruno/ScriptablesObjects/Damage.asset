@@ -13,7 +13,8 @@ MonoBehaviour:
   m_Name: Damage
   m_EditorClassIdentifier: Assembly-CSharp::SoUpgradeSlots
   naime: Damage
-  upgradesDetails: example
+  startDetails: +
+  finalDetails: '%'
   baseStat: 1
   basePrice: 100
   statType: 1

@@ -13,11 +13,11 @@ MonoBehaviour:
   m_Name: PASOSxTAP
   m_EditorClassIdentifier: Assembly-CSharp::SoUpgradeSlots
   naime: PASOS X TAP
-  upgradesDetails: example
+  startDetails: 
+  finalDetails: /tap
   baseStat: 10
-  totalStat: 10
   basePrice: 25
-  totalPrice: 25
+  statType: 0
   growthRate: 1.14
   increment: 10
   Icon: {fileID: 0}

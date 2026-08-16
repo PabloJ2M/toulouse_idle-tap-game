@@ -4,7 +4,8 @@ using UnityEngine.UI;
 public class SoUpgradeSlots : ScriptableObject
 {
     public string naime;
-    public string upgradesDetails;
+    public string startDetails;
+    public string finalDetails;
 
     public long baseStat;
     public long basePrice;

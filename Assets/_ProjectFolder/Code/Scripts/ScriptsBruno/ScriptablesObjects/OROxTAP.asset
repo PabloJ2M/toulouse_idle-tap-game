@@ -13,11 +13,11 @@ MonoBehaviour:
   m_Name: OROxTAP
   m_EditorClassIdentifier: Assembly-CSharp::SoUpgradeSlots
   naime: ORO X TAP
-  upgradesDetails: example
+  startDetails: $
+  finalDetails: /tap
   baseStat: 10
-  totalStat: 100
   basePrice: 20
-  totalPrice: 20
+  statType: 0
   growthRate: 1.13
   increment: 10
   Icon: {fileID: 0}

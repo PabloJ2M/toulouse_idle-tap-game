@@ -30,7 +30,7 @@ public class UpgradeSlot : MonoBehaviour
         if (type == priceID)
         {
             slotName.SetText($"{slot.naime}\n {GetDetails(slot)}");
-            slotPrice.SetText(amount.ToString());
+            slotPrice.SetText($"${amount.ToString()}");
         }
     }
     private string GetDetails(SoUpgradeSlots slot) => $"{slot.startDetails}{SlotUpgradeManager.Instance.GetStat(priceID)}{slot.finalDetails} > {slot.startDetails}{SlotUpgradeManager.Instance.GetStat(priceID, true)}{slot.finalDetails}";

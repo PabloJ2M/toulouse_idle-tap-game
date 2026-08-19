@@ -4,9 +4,9 @@ public class Enemy : MonoBehaviour
 {
     [SerializeField] private EnemyID enemyID;
 
-    [SerializeField] private int hp;
-    [SerializeField] private int atk;
-    [SerializeField] private int def;
+    [SerializeField] private float hp;
+    [SerializeField] private float atk;
+    [SerializeField] private float def;
     public void SetStats(SoEnemy details) 
     {
         hp = details.hp;
@@ -15,10 +15,12 @@ public class Enemy : MonoBehaviour
         enemyID = details.enemyID;
     }
     public EnemyID EnemyID { get {  return enemyID; } }
-    public void EnemyAttack(Hero hero) => hero.ReciveDamage(10); // calculadora de danio + buffs
-    public void ReciveDamage(int amount)
+    public void EnemyAttack(Hero hero) => hero.ReciveDamage(atk); // calculadora de danio + buffs
+    public void ReciveDamage(float amount)
     {
-        int totalDamage = def - amount;
+        float totalDamage = def - amount;
         if (totalDamage > 0) hp -= totalDamage;
+        else print("se bloqueo todo el danio");
     }
+    public bool IsAlive() => hp > 0;
 }

@@ -2,19 +2,21 @@ using UnityEngine;
 
 public class Hero : MonoBehaviour
 {
-    [SerializeField] private int hp;
-    [SerializeField] private int atk;
-    [SerializeField] private int def;
-    public void SetStats(int hp, int atk, int def)
+    [SerializeField] private float hp;
+    [SerializeField] private float atk;
+    [SerializeField] private float def;
+    public void SetStats(float hp, float atk, float def)
     {
         this.hp = hp;
         this.atk = atk;
         this.def = def;
     }
-    public void ReciveDamage(int amount)
+    public void ReciveDamage(float amount)
     {
-        int totalDamage = def - amount;
+        float totalDamage = def - amount;
         if (totalDamage > 0) hp -= totalDamage;
     }
+    public float Attack() => atk;
+    public float GetTotalAttack() => atk;
     public bool IsAlive() => hp > 0;
 }

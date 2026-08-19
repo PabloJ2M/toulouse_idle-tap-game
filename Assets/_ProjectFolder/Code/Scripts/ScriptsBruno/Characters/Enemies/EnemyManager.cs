@@ -20,6 +20,7 @@ public class EnemyManager : SingletonBasic<EnemyManager>
             return availableEnemies.Find(x => x.enemyID == enemyID);
         return null;
     }
+    public EnemyGroup GetEnemyGroup() => actualGroup;
     public void AssignManualEnemies(EnemyID enemyID, int amount) => SetEnemies(enemyID, amount);
     public void AssingRandomEnemies() 
     {

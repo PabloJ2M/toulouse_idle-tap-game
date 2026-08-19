@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3348bff8c2b4e4b42b71432301c9b743, type: 3}
   m_Name: Warrior
   m_EditorClassIdentifier: Assembly-CSharp::SoHero
-  defaultName: 
-  hp: 0
-  atk: 0
-  def: 0
-  pasive: 0
+  defaultName: Warrior
+  hp: 800
+  atk: 150
+  def: 30
+  pasive: 1

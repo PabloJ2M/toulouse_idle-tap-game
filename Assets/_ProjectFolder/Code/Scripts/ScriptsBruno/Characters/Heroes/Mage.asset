@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Mage
   m_EditorClassIdentifier: Assembly-CSharp::SoHero
   defaultName: 
-  hp: 0
-  atk: 0
-  def: 0
-  pasive: 0
+  hp: 1400
+  atk: 100
+  def: 70
+  pasive: 3

@@ -1,37 +1,20 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 [System.Serializable]
-public class SerializedDictionary<TKey, TValue> : ISerializationCallbackReceiver, IEnumerable<KeyValuePair<TKey, TValue>>
+public class SerializedDictionary<TKey, TValue> : Dictionary<TKey, TValue>, ISerializationCallbackReceiver
 {
     [SerializeField] private List<TKey> keys = new();
     [SerializeField] private List<TValue> values = new();
 
-    public Dictionary<TKey, TValue> Dictionary = new();
-
-    public int Count => Dictionary.Count;
-    public List<TKey> Keys => keys;
-    public List<TValue> Values => values;
-
-    public TValue this[TKey key]
-    {
-        get => Dictionary[key];
-        set => Dictionary[key] = value;
-    }
-
-    public void Add(TKey key, TValue value) => Dictionary.Add(key, value);
-    public bool Remove(TKey key) => Dictionary.Remove(key);
-    public bool ContainsKey(TKey key) => Dictionary.ContainsKey(key);
-    public bool TryGetValue(TKey key, out TValue value) => Dictionary.TryGetValue(key, out value);
-    public void Clear() => Dictionary.Clear();
-
     public void OnBeforeSerialize()
     {
+        if (Count == 0 && keys.Count > 0) return;
+
         keys.Clear();
         values.Clear();
         
-        foreach (var kvp in Dictionary)
+        foreach (var kvp in this)
         {
             keys.Add(kvp.Key);
             values.Add(kvp.Value);
@@ -39,15 +22,22 @@ public class SerializedDictionary<TKey, TValue> : ISerializationCallbackReceiver
     }
     public void OnAfterDeserialize()
     {
-        Dictionary.Clear();
+        Clear();
         
         for (int i = 0; i < Mathf.Min(keys.Count, values.Count); i++)
         {
-            if (!Dictionary.ContainsKey(keys[i]))
-                Dictionary.Add(keys[i], values[i]);
+            if (keys[i] is null) continue;
+
+            if (!ContainsKey(keys[i]))
+                Add(keys[i], values[i]);
         }
     }
 
-    public IEnumerator<KeyValuePair<TKey, TValue>> GetEnumerator() => Dictionary.GetEnumerator();
-    IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
+    public void Parse(Dictionary<TKey, TValue> dictionary)
+    {
+        Clear();
+
+        foreach (var kvp in dictionary)
+            Add(kvp.Key, kvp.Value);
+    }
 }

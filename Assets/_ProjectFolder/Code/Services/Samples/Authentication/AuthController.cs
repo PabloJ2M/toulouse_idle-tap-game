@@ -2,15 +2,17 @@ using UnityEngine;
 
 namespace Unity.Services.Authentication.Samples
 {
-    using Core;
     using PlayerAccounts;
     
-    public class AuthController : ServicesStatic<AuthController>, IServiceModule
+    public class AuthController : AuthModule
     {
         [SerializeField] private bool debugging = false;
 
-        public void OnInitialized() => _ = SignInAsync();
-        public void SignIn() => _ = SignInAsync();
+        public override void OnInitialized()
+        {
+            base.OnInitialized();
+            _ = SignInAsync();
+        }
         public void SignIn(ProviderType type) => _ = SignInAsync(type);
         
         private async Awaitable SignInAsync()
@@ -27,6 +29,8 @@ namespace Unity.Services.Authentication.Samples
             #else
             await SignInAsync(ProviderType.UnityPlayerAccounts);
             #endif
+
+            OnPlayerNameChanged?.Invoke(Service.PlayerName);
         }
         private static async Awaitable SignInAsync(ProviderType type)
         {

@@ -10,6 +10,10 @@ namespace Unity.Services.Authentication.Samples
         [SerializeField] private ProviderType provider;
         
         private void Awake() => GetComponent<Button>().onClick.AddListener(OnClick);
-        private void OnClick() => AuthController.Instance?.SignIn(provider);
+        private void OnClick()
+        {
+            var controller = AuthController.Instance as AuthController;
+            controller?.SignIn(provider);
+        }
     }
 }

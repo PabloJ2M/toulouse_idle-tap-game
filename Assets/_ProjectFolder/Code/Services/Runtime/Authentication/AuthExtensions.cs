@@ -30,5 +30,8 @@ namespace Unity.Services.Authentication.PlayerAccounts
             var code when code == AuthenticationErrorCodes.InvalidParameters => AuthResultCode.InvalidCredentials,
             _ => AuthResultCode.Unknown
         };
+        
+        public static async Awaitable<string> UpdateName(this IAuthenticationService service, string newName) =>
+            await service.UpdatePlayerNameAsync(newName);
     }
 }

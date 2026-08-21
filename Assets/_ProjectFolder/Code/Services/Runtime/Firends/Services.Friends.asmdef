@@ -1,10 +1,9 @@
 {
-    "name": "Services.Authentication",
-    "rootNamespace": "Unity.Services.Authentication",
+    "name": "Services.Friends",
+    "rootNamespace": "Unity.Services.Friends",
     "references": [
         "GUID:fe25561d224ed4743af4c60938a59d0b",
-        "GUID:5540e30183c82e84b954c033c388e06c",
-        "GUID:9f589beecac4b0647ad2197f9cb3d505",
+        "GUID:c3e847927e5747f9a371134e85820ab3",
         "GUID:d691c18f81872be3eb4278dabe3b57e6"
     ],
     "includePlatforms": [],
@@ -21,9 +20,9 @@
             "define": "ServiceCore"
         },
         {
-            "name": "com.unity.services.authentication",
-            "expression": "3.0.0",
-            "define": "Authentication"
+            "name": "com.unity.services.friends",
+            "expression": "1.0.0",
+            "define": "Friends"
         }
     ],
     "noEngineReferences": false

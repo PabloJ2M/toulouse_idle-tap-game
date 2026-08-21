@@ -13,6 +13,11 @@ public struct DictionaryData<TKey, TValue>
         keys = new(dict.Keys);
         values = new(dict.Values);
     }
+    public DictionaryData(IDictionary<TKey, TValue> dict)
+    {
+        keys = new(dict.Keys);
+        values = new(dict.Values);
+    }
 
     public Dictionary<TKey, TValue> ToDictionary()
     {

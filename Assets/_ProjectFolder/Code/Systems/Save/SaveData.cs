@@ -24,38 +24,6 @@ public abstract class SaveData<T>
     }
 }
 
-public class SaveDataDictionary<TKey, TValue> : SaveData<Dictionary<TKey, TValue>>
-{
-    public SaveDataDictionary(string localDataID) : base(localDataID) { }
-    
-    public override void Load(ref Dictionary<TKey, TValue> value)
-    {
-        if (!ProtectedPlayerPrefs.HasKey(LocalDataID)) return;
-
-        string json = ProtectedPlayerPrefs.GetString(LocalDataID);
-        var data = JsonUtility.FromJson<DictionaryData<TKey, TValue>>(json);
-
-        if (value == null) {
-            value = data.ToDictionary();
-            return;
-        }
-        
-        value.Clear();
-        foreach (var kvp in data.ToDictionary())
-            value[kvp.Key] = kvp.Value;
-    }
-    public override void Save(Dictionary<TKey, TValue> value)
-    {
-        if (value == null) return;
-
-        var data = new DictionaryData<TKey, TValue>(value);
-        string json = JsonUtility.ToJson(data);
-
-        ProtectedPlayerPrefs.SetString(LocalDataID, json);
-        ProtectedPlayerPrefs.Save();
-    }
-}
-
 public class SaveDataObject : SaveData<object> { public SaveDataObject(string localDataID) : base(localDataID) { } }
 public class SaveDataInt : SaveData<int>
 {
@@ -98,6 +66,38 @@ public class SaveDataString : SaveData<string>
     public override void Save(string value)
     {
         ProtectedPlayerPrefs.SetString(LocalDataID, value);
+        ProtectedPlayerPrefs.Save();
+    }
+}
+
+public class SaveDataDictionary<TKey, TValue> : SaveData<Dictionary<TKey, TValue>>
+{
+    public SaveDataDictionary(string localDataID) : base(localDataID) { }
+    
+    public override void Load(ref Dictionary<TKey, TValue> value)
+    {
+        if (!ProtectedPlayerPrefs.HasKey(LocalDataID)) return;
+
+        string json = ProtectedPlayerPrefs.GetString(LocalDataID);
+        var data = JsonUtility.FromJson<DictionaryData<TKey, TValue>>(json);
+
+        if (value == null) {
+            value = data.ToDictionary();
+            return;
+        }
+        
+        value.Clear();
+        foreach (var kvp in data.ToDictionary())
+            value[kvp.Key] = kvp.Value;
+    }
+    public override void Save(Dictionary<TKey, TValue> value)
+    {
+        if (value == null) return;
+
+        var data = new DictionaryData<TKey, TValue>(value);
+        string json = JsonUtility.ToJson(data);
+
+        ProtectedPlayerPrefs.SetString(LocalDataID, json);
         ProtectedPlayerPrefs.Save();
     }
 }

@@ -8,7 +8,7 @@ namespace Unity.Services.Economy.Samples
     public class EconomySynchronize : EconomyModule
     {
         private EconomyManager _economyManager;
-        private readonly ScheduleVersion _saveVersion = new();
+        private readonly TaskAsync _saveTask = new(kDebounce);
 
         private void Awake() => _economyManager = GetComponent<EconomyManager>();
         private void OnEnable() => EconomyManager.OnBalanceUpdated += HandleBalanceChanged;
@@ -19,7 +19,7 @@ namespace Unity.Services.Economy.Samples
             Current[type] = newValue;
             
             if (ServicesStatus.IsSignedIn)
-                this.Schedule(kDebounce, _saveVersion, Save);
+                this.OverrideTask(_saveTask, Save);
         }
 
         public override void OnUserSignedIn(string playerID)
@@ -42,13 +42,13 @@ namespace Unity.Services.Economy.Samples
         private void OnApplicationPause(bool paused)
         {
             if (paused)
-                _saveVersion.Next();
+                _saveTask.Next();
 
             Save();
         }
         private void OnApplicationQuit()
         {
-            _saveVersion.Next();
+            _saveTask.Next();
             Save();
         }
     }

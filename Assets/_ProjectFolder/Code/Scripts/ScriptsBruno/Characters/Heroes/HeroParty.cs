@@ -1,42 +1,41 @@
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Rendering;
 
-public class HeroParty : SingletonBasic<HeroParty>
+public class HeroParty : MonoBehaviour
 {
+    [SerializeField] private Hero party;
+    [SerializeField] private BuffUtil buff;
     [SerializeField] private SerializedDictionary<HeroID, SoHero> availablesHeroes;
-    private Dictionary<HeroID, SoHero> selectedHeroes;
-    private Hero party;
-    protected override void Awake()
+    
+    private readonly Dictionary<HeroID, SoHero> selectedHeroes = new();
+    
+    private void Awake()
     {
-        base.Awake();
         AssingHero(HeroID.Mage, availablesHeroes[HeroID.Mage]);
         AssingHero(HeroID.Warrior, availablesHeroes[HeroID.Warrior]);
-
-        AssignStats();
     }
+    private void Start() => AssignStats();
 
     public void AssignStats() // calculadora de danio + buffs
     {
-        float hp = 0;
-        float atk = 0;
-        float def = 0;
-        BuffUtil.Instance.DeActiveBuffs();
+        float hp = 0, atk = 0, def = 0;
+        buff.DeActiveBuffs();
 
         foreach (var item in selectedHeroes)
         {
             hp += item.Value.hp;
             atk += item.Value.atk;
             def += item.Value.def;
-            BuffUtil.Instance.ActivateBuff(item.Value.pasive);
+            buff.ActivateBuff(item.Value.pasive);
         }
         // aplicar buffs y multiplicadores
-        hp = (hp + StatUtil.Instance.GetBonusHealth()) * BuffUtil.Instance.GetBuff(BuffID.Hp);
-        atk = (atk + StatUtil.Instance.GetBonusDamage()) * BuffUtil.Instance.GetBuff(BuffID.Atk);
-        def = (def + StatUtil.Instance.GetBonusDefense()) * BuffUtil.Instance.GetBuff(BuffID.Def);
+        hp = (hp + StatUtil.Instance.GetBonusHealth()) * buff.GetBuff(BuffID.Hp);
+        atk = (atk + StatUtil.Instance.GetBonusDamage()) * buff.GetBuff(BuffID.Atk);
+        def = (def + StatUtil.Instance.GetBonusDefense()) * buff.GetBuff(BuffID.Def);
         // despues
-        party.SetStats(hp, atk, def);
+        party?.SetStats(hp, atk, def);
     }
+    
     public Hero GetParty() => party;
     public void AssingHero(HeroID heroID, SoHero hero) => selectedHeroes.Add(heroID, hero);
     public void AttackEnemy(Enemy enemy) => enemy.ReciveDamage(party.GetTotalAttack());

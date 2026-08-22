@@ -1,7 +1,8 @@
 using System;
-using System.Diagnostics;
 using Unity.Services.Economy;
+using Unity.Services.Economy.Samples;
 using UnityEngine;
+
 public class SlotUpgradeManager : SingletonBasic<SlotUpgradeManager>{
 
     [SerializeField] private SerializedDictionary<SlotID, long> upgradesLevelSaves; // el nivel
@@ -13,14 +14,19 @@ public class SlotUpgradeManager : SingletonBasic<SlotUpgradeManager>{
     protected override void Awake()
     {
         base.Awake();
-        saveData.Load(ref upgradesLevelSaves.Dictionary);
+        OnLoadSaves();
+    }
+    private void OnLoadSaves()
+    {
+        var saves = upgradesLevelSaves.Parse();
+        saveData.Load(ref saves);
     }
     public float GetStat(SlotID slotID, bool nextLevel = false) => GetStatByID(slotID, nextLevel);
     public float GetPrice(SlotID slotID) => GetPriceByID(slotID);
     public void SetUpgradeID(SlotID slotID, long level) 
     {
         upgradesLevelSaves[slotID] = level;
-        saveData.Save(upgradesLevelSaves.Dictionary);
+        saveData.Save(upgradesLevelSaves);
     }
     private void ModifyUpgradeID(SlotID slotID, long amount) => SetUpgradeID(slotID, upgradesLevelSaves[slotID] + amount);
     public void AddUpgradeID(SlotID slotID, uint amount) => ModifyUpgradeID(slotID, amount);
@@ -58,12 +64,12 @@ public class SlotUpgradeManager : SingletonBasic<SlotUpgradeManager>{
         if (!nextLevel) level = upgradesLevelSaves[slotID];
         else level = upgradesLevelSaves[slotID] + 1;
 
-        switch (data[slotID].statType)
+        return data[slotID].statType switch
         {
-            case StatType.Incremental: return (float)IncrementalStat.GetTotalStat(data[slotID], level);
-            case StatType.GruExponential: return (float)GruExpoStat.GetTotalStat(data[slotID], level);
-        }
-        return 0;
+            StatType.Incremental => IncrementalStat.GetTotalStat(data[slotID], level),
+            StatType.GruExponential => GruExpoStat.GetTotalStat(data[slotID], level),
+            _ => 0
+        };
     }
     private uint GetPriceByID(SlotID slotID) => (uint)IncrementalStat.GetTotalPrice(data[slotID], upgradesLevelSaves[slotID]);
     public void UpdateLevel(SlotID priceID) => OnChestUpgradesUpdated?.Invoke(priceID, data[priceID], IncrementalStat.GetTotalPrice(data[priceID], upgradesLevelSaves[priceID]));    

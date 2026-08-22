@@ -3,9 +3,11 @@ using UnityEngine;
 
 public class CombatZone : MonoBehaviour
 {
+    [SerializeField] private HeroParty party;
     [SerializeField] private EnemyGroup enemyGroup;
     private Coroutine combatCoroutine;
     public void StartCombat() => Combat();
+    
     private void Combat() 
     {
         enemyGroup = EnemyManager.Instance.GetEnemyGroup();
@@ -14,13 +16,14 @@ public class CombatZone : MonoBehaviour
     }
     private IEnumerator CombatRoutine() 
     {
-        while (HeroParty.Instance.IsPartyAlive() && enemyGroup.IsEnemiesAlive())
+        while (party.IsPartyAlive() && enemyGroup.IsEnemiesAlive())
         {
-            enemyGroup.AttackHero(HeroParty.Instance.GetParty());
-            HeroParty.Instance.AttackEnemy(enemyGroup.GetLastAttacker());
+            enemyGroup.AttackHero(party.GetParty());
+            party.AttackEnemy(enemyGroup.GetLastAttacker());
             enemyGroup.CheckEnemiesAlive();
             yield return new WaitForSecondsRealtime(0.5f);
         }
+        
         combatCoroutine = null;
     }
 }

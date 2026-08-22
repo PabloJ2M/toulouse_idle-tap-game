@@ -5,6 +5,7 @@ public class Hero : MonoBehaviour
     [SerializeField] private float hp;
     [SerializeField] private float atk;
     [SerializeField] private float def;
+    
     public void SetStats(float hp, float atk, float def)
     {
         this.hp = hp;

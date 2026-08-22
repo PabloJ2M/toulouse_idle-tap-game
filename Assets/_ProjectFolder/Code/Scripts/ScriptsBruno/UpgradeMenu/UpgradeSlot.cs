@@ -1,8 +1,8 @@
 using TMPro;
 using Unity.Services.Economy;
+using Unity.Services.Economy.Samples;
 using UnityEngine;
 using UnityEngine.UI;
-
 
 public class UpgradeSlot : MonoBehaviour
 {
@@ -25,24 +25,17 @@ public class UpgradeSlot : MonoBehaviour
         SlotUpgradeManager.OnChestUpgradesUpdated -= UpdateUI;
         EconomyManager.OnBalanceUpdated -= EvaluatePrice;
     }
-    private void UpdateUI(SlotID type, SoUpgradeSlots slot, float amount) 
+    private void UpdateUI(SlotID type, SoUpgradeSlots slot, float amount)
     {
-        if (type == priceID)
-        {
-            slotName.SetText($"{slot.naime}\n {GetDetails(slot)}");
-            slotPrice.SetText($"${amount}");
-        }
+        if (type != priceID) return;
+        slotName.SetText($"{slot.naime}\n {GetDetails(slot)}");
+        slotPrice.SetText($"${amount}");
     }
     private string GetDetails(SoUpgradeSlots slot) => $"{slot.startDetails}{SlotUpgradeManager.Instance.GetStat(priceID)}{slot.finalDetails} > {slot.startDetails}{SlotUpgradeManager.Instance.GetStat(priceID, true)}{slot.finalDetails}";
     private void EvaluatePrice(BalanceType balance, long amount) 
     {
-        if (balance == BalanceType.GOLD) 
-        {
-            if (amount > SlotUpgradeManager.Instance.GetPrice(priceID)) 
-                button.interactable = true;
-            else
-                button.interactable = false;
-        }
+        if (balance == BalanceType.GOLD)
+            button.interactable = amount > SlotUpgradeManager.Instance.GetPrice(priceID);
     }
     public void PayPrice() => SlotUpgradeManager.Instance.LevelUpChest(priceID);
 }

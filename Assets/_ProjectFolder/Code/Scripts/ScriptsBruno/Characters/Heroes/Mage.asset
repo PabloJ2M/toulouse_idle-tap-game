@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3348bff8c2b4e4b42b71432301c9b743, type: 3}
   m_Name: Mage
   m_EditorClassIdentifier: Assembly-CSharp::SoHero
-  defaultName: 
+  defaultName: Mage
   hp: 1400
   atk: 100
   def: 70

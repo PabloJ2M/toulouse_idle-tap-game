@@ -78,13 +78,11 @@ public class SaveDataDictionary<TKey, TValue> : SaveData<Dictionary<TKey, TValue
     {
         if (!ProtectedPlayerPrefs.HasKey(LocalDataID)) return;
 
-        string json = ProtectedPlayerPrefs.GetString(LocalDataID);
+        var json = ProtectedPlayerPrefs.GetString(LocalDataID);
         var data = JsonUtility.FromJson<DictionaryData<TKey, TValue>>(json);
 
-        if (value == null) {
-            value = data.ToDictionary();
-            return;
-        }
+        value ??= new();
+        if (string.IsNullOrEmpty(json)) return;
         
         value.Clear();
         foreach (var kvp in data.ToDictionary())

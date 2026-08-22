@@ -1,38 +1,36 @@
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Rendering;
 
-public class BuffUtil : SingletonBasic<BuffUtil>
+public class BuffUtil : MonoBehaviour
 {
     [SerializeField] private SerializedDictionary<BuffID, float> buffMultiplier;
-    private Dictionary<BuffID, bool> pasiveSkills;
+    private readonly Dictionary<BuffID, bool> _passiveSkills = new();
 
-    protected override void Awake()
+    private void Awake()
     {
-        base.Awake();
-
-        pasiveSkills.Add(BuffID.Hp, false);
-        pasiveSkills.Add(BuffID.Atk, false);
-        pasiveSkills.Add(BuffID.Def, false);
-        pasiveSkills.Add(BuffID.Heal, false);
-        pasiveSkills.Add(BuffID.steps, false);
-        pasiveSkills.Add(BuffID.cash, false);
+        _passiveSkills.Add(BuffID.Hp, false);
+        _passiveSkills.Add(BuffID.Atk, false);
+        _passiveSkills.Add(BuffID.Def, false);
+        _passiveSkills.Add(BuffID.Heal, false);
+        _passiveSkills.Add(BuffID.steps, false);
+        _passiveSkills.Add(BuffID.cash, false);
     }
-    public void ActivateBuff(BuffID buffID) => pasiveSkills[buffID] = true;
+    public void ActivateBuff(BuffID buffID) => _passiveSkills[buffID] = true;
     public void DeActiveBuffs() 
     {
-        pasiveSkills[BuffID.Hp] = false;
-        pasiveSkills[BuffID.Atk] = false;
-        pasiveSkills[BuffID.Def] = false;
-        pasiveSkills[BuffID.Heal] = false;
-        pasiveSkills[BuffID.steps] = false;
-        pasiveSkills[BuffID.cash] = false;
+        _passiveSkills[BuffID.Hp] = false;
+        _passiveSkills[BuffID.Atk] = false;
+        _passiveSkills[BuffID.Def] = false;
+        _passiveSkills[BuffID.Heal] = false;
+        _passiveSkills[BuffID.steps] = false;
+        _passiveSkills[BuffID.cash] = false;
 
     }
-    public float GetBuff(BuffID buffID) 
+    public float GetBuff(BuffID buffID)
     {
-        if (pasiveSkills[buffID])
-            return buffMultiplier[buffID];
-        else return 0;        
+        if (!_passiveSkills.TryGetValue(buffID, out var hasSkill))
+            return 0;
+        
+        return hasSkill ? buffMultiplier.GetValueOrDefault(buffID, 0) : 0;
     }
 }

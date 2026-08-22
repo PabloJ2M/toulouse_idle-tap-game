@@ -100,6 +100,15 @@ public partial class @TapTest: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""TestAction"",
+                    ""type"": ""Button"",
+                    ""id"": ""ffaa265d-2f76-48a1-bfcb-a2a0f7f1a7fc"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -135,6 +144,17 @@ public partial class @TapTest: IInputActionCollection2, IDisposable
                     ""action"": ""Tap"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""bfb794f6-b6db-47d1-977b-c7961fe2dda2"",
+                    ""path"": ""<Keyboard>/p"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""TestAction"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -161,6 +181,7 @@ public partial class @TapTest: IInputActionCollection2, IDisposable
         // PhoneVersion
         m_PhoneVersion = asset.FindActionMap("PhoneVersion", throwIfNotFound: true);
         m_PhoneVersion_Tap = m_PhoneVersion.FindAction("Tap", throwIfNotFound: true);
+        m_PhoneVersion_TestAction = m_PhoneVersion.FindAction("TestAction", throwIfNotFound: true);
     }
 
     ~@TapTest()
@@ -242,6 +263,7 @@ public partial class @TapTest: IInputActionCollection2, IDisposable
     private readonly InputActionMap m_PhoneVersion;
     private List<IPhoneVersionActions> m_PhoneVersionActionsCallbackInterfaces = new List<IPhoneVersionActions>();
     private readonly InputAction m_PhoneVersion_Tap;
+    private readonly InputAction m_PhoneVersion_TestAction;
     /// <summary>
     /// Provides access to input actions defined in input action map "PhoneVersion".
     /// </summary>
@@ -257,6 +279,10 @@ public partial class @TapTest: IInputActionCollection2, IDisposable
         /// Provides access to the underlying input action "PhoneVersion/Tap".
         /// </summary>
         public InputAction @Tap => m_Wrapper.m_PhoneVersion_Tap;
+        /// <summary>
+        /// Provides access to the underlying input action "PhoneVersion/TestAction".
+        /// </summary>
+        public InputAction @TestAction => m_Wrapper.m_PhoneVersion_TestAction;
         /// <summary>
         /// Provides access to the underlying input action map instance.
         /// </summary>
@@ -286,6 +312,9 @@ public partial class @TapTest: IInputActionCollection2, IDisposable
             @Tap.started += instance.OnTap;
             @Tap.performed += instance.OnTap;
             @Tap.canceled += instance.OnTap;
+            @TestAction.started += instance.OnTestAction;
+            @TestAction.performed += instance.OnTestAction;
+            @TestAction.canceled += instance.OnTestAction;
         }
 
         /// <summary>
@@ -300,6 +329,9 @@ public partial class @TapTest: IInputActionCollection2, IDisposable
             @Tap.started -= instance.OnTap;
             @Tap.performed -= instance.OnTap;
             @Tap.canceled -= instance.OnTap;
+            @TestAction.started -= instance.OnTestAction;
+            @TestAction.performed -= instance.OnTestAction;
+            @TestAction.canceled -= instance.OnTestAction;
         }
 
         /// <summary>
@@ -360,5 +392,12 @@ public partial class @TapTest: IInputActionCollection2, IDisposable
         /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
         /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
         void OnTap(InputAction.CallbackContext context);
+        /// <summary>
+        /// Method invoked when associated input action "TestAction" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnTestAction(InputAction.CallbackContext context);
     }
 }

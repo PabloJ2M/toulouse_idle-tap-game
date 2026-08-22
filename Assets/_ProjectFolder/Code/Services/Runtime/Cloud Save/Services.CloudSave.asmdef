@@ -1,0 +1,34 @@
+{
+    "name": "Services.CloudSave",
+    "rootNamespace": "Unity.Services.CloudSave",
+    "references": [
+        "GUID:fe25561d224ed4743af4c60938a59d0b",
+        "GUID:be0d2672886cc45b2bcea5a5053a5347",
+        "GUID:d691c18f81872be3eb4278dabe3b57e6"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [
+        {
+            "name": "com.unity.services.core",
+            "expression": "1.0.0",
+            "define": "ServiceCore"
+        },
+        {
+            "name": "com.unity.services.authentication",
+            "expression": "3.0.0",
+            "define": "Authentication"
+        },
+        {
+            "name": "com.unity.services.cloudsave",
+            "expression": "3.0.0",
+            "define": "CloudSave"
+        }
+    ],
+    "noEngineReferences": false
+}

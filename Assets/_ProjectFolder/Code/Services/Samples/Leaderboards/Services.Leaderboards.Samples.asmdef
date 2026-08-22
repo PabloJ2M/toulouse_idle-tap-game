@@ -1,0 +1,20 @@
+{
+    "name": "Services.Leaderboards.Samples",
+    "rootNamespace": "Unity.Services.Leaderboards.Samples",
+    "references": [
+        "GUID:2073209246492244c9ad62c89d8d37bb",
+        "GUID:d691c18f81872be3eb4278dabe3b57e6",
+        "GUID:351eb46206d7fc51a8537d4b56aa7e37",
+        "GUID:55441f185f4707a27b94101da9a62b25",
+        "GUID:0b169244d8d7d81b091d03e94b06df00"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

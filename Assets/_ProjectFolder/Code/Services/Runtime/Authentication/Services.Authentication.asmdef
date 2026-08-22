@@ -1,0 +1,30 @@
+{
+    "name": "Services.Authentication",
+    "rootNamespace": "Unity.Services.Authentication",
+    "references": [
+        "GUID:fe25561d224ed4743af4c60938a59d0b",
+        "GUID:5540e30183c82e84b954c033c388e06c",
+        "GUID:9f589beecac4b0647ad2197f9cb3d505",
+        "GUID:d691c18f81872be3eb4278dabe3b57e6"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [
+        {
+            "name": "com.unity.services.core",
+            "expression": "1.0.0",
+            "define": "ServiceCore"
+        },
+        {
+            "name": "com.unity.services.authentication",
+            "expression": "3.0.0",
+            "define": "Authentication"
+        }
+    ],
+    "noEngineReferences": false
+}

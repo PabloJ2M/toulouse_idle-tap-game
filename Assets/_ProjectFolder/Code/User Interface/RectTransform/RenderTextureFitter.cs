@@ -17,7 +17,8 @@ namespace UnityEngine.UI
         private void FixResolution()
         {
             if (!targetRenderTexture || !rectTransform) return;
-
+            
+            LayoutRebuilder.ForceRebuildLayoutImmediate(rectTransform);
             var nuevoAncho = Mathf.Max(1, Mathf.RoundToInt(rectTransform.rect.width));
             var nuevoAlto = Mathf.Max(1, Mathf.RoundToInt(rectTransform.rect.height));
             
@@ -31,12 +32,12 @@ namespace UnityEngine.UI
             targetRenderTexture.height = nuevoAlto;
             targetRenderTexture.Create();
 
-            // #if UNITY_EDITOR
-            // if (!Application.isPlaying)
-            // {
-            //     UnityEditor.EditorUtility.SetDirty(targetRenderTexture);
-            // }
-            // #endif
+            #if UNITY_EDITOR
+            if (!Application.isPlaying)
+            {
+                UnityEditor.EditorUtility.SetDirty(targetRenderTexture);
+            }
+            #endif
         }
     }
 }

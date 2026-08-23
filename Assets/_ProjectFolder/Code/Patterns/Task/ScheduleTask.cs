@@ -6,6 +6,7 @@ public static class ScheduleTask
 {
     public static void OverrideTask(this Object owner, TaskAsync task, Action onComplete) =>
         _ = owner.OverrideTaskAsync(task, onComplete);
+    
     private static async Awaitable OverrideTaskAsync(this Object owner, TaskAsync task, Action onComplete)
     {
         ulong currentVersion = task.Next();
@@ -15,16 +16,30 @@ public static class ScheduleTask
             onComplete?.Invoke();
     }
 
-    public static void LoopTask(this Object owner, TaskLoopAsync task, DateTime startTime, Action onTick, Action onComplete) =>
-        _ = LoopTaskAsync(owner, task, startTime, onTick, onComplete);
-    private static async Awaitable LoopTaskAsync(this Object owner, TaskLoopAsync task, DateTime startTime, Action onTick, Action onComplete)
+    public static void LoopTask(this  Object owner, TaskLoopAsync task,
+        Action onTick, Action onComplete = null) =>
+        _ = owner.LoopTaskAsync(task, onTick, onComplete);
+
+    private static async Awaitable LoopTaskAsync(this Object owner, TaskLoopAsync task,
+        Action onTick, Action onComplete = null)
     {
-        ulong currentVersion = task.Next();
+        var currentVersion = task.Next();
+        await owner.RunTicksAsync(task, currentVersion, 0f, onTick, onComplete);
+    }
+    
+    public static void LoopTaskOffline(this Object owner, TaskLoopAsync task, DateTime startTime,
+        Action onTick, Action onComplete) =>
+        _ = owner.LoopTaskOfflineAsync(task, startTime, onTick, onComplete);
+    
+    private static async Awaitable LoopTaskOfflineAsync(this Object owner, TaskLoopAsync task, DateTime startTime,
+        Action onTick, Action onComplete)
+    {
+        var currentVersion = task.Next();
 
-        double elapsedSeconds = (DateTime.UtcNow - startTime).TotalSeconds;
-        int ticksOutRuntime = Mathf.FloorToInt((float)elapsedSeconds / task.TaskInterval);
+        var elapsedSeconds = (DateTime.UtcNow - startTime).TotalSeconds;
+        var ticksOutRuntime = Mathf.FloorToInt((float)elapsedSeconds / task.TaskInterval);
 
-        for (int i = 0; i < ticksOutRuntime; i++)
+        for (var i = 0; i < ticksOutRuntime; i++)
             onTick?.Invoke();
 
         if (elapsedSeconds >= task.Duration) {
@@ -32,23 +47,27 @@ public static class ScheduleTask
             return;
         }
 
-        float remaining = task.Duration - (float)elapsedSeconds;
+        await owner.RunTicksAsync(task, currentVersion, elapsedSeconds, onTick, onComplete);
+    }
 
-        while (remaining > 0)
+    private static async Awaitable RunTicksAsync(this Object owner, TaskLoopAsync task,
+        ulong currentVersion, double elapsedSeconds,
+        Action onTick, Action onComplete = null)
+    {
+        var remaining = task.Duration - (float)elapsedSeconds;
+        
+        while (remaining > 0 || task.Duration == 0)
         {
-            float sinceLastTick = (float)(elapsedSeconds % task.TaskInterval);
-            float nextTickIn = task.TaskInterval - sinceLastTick;
-            float wait = Mathf.Min(nextTickIn, remaining);
+            var sinceLastTick = (float)(elapsedSeconds % task.TaskInterval);
+            var nextTickIn = task.TaskInterval - sinceLastTick;
+            var wait = Mathf.Min(nextTickIn, remaining);
 
             await Awaitable.WaitForSecondsAsync(wait);
-
-            if (!owner || !task.IsCurrent(currentVersion))
-                return;
-
             elapsedSeconds += wait;
             remaining -= wait;
 
-            onTick?.Invoke();
+            if (owner && task.IsCurrent(currentVersion))
+                onTick();
         }
 
         if (owner && task.IsCurrent(currentVersion))

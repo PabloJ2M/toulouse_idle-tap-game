@@ -33,7 +33,7 @@ namespace UnityEngine.Pool
         }
 
         protected IObjectPooled GetPrefabByEntityId(EntityId entityId) => _pools[entityId].Get();
-        protected IObjectPooled GetPrefabByIndex(int index) => GetPrefabByEntityId(poolSettings.List[index].GetEntityId());
-        protected IObjectPooled GetPrefabRandom() => GetPrefabByEntityId(poolSettings.List.RandomPrefab.GetEntityId());
+        protected IObjectPooled GetPrefabByIndex(int index) => GetPrefabByEntityId(poolSettings.ListHash[index].GetEntityId());
+        protected IObjectPooled GetPrefabRandom() => GetPrefabByEntityId(poolSettings.ListHash.RandomPrefab.GetEntityId());
     }
 }

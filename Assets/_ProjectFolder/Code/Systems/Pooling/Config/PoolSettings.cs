@@ -26,15 +26,15 @@ namespace UnityEngine.Pool
     }
     
     [Serializable]
-    public class PoolArraySettings : PoolSettings<ScriptablePoolList>
+    public class PoolArraySettings : PoolSettings<ScriptablePoolListBase>
     {
-        public ScriptablePoolList List => reference;
+        public ScriptablePoolListBase ListHash => reference;
 
         public void Create(ref IDictionary<EntityId, IObjectPool<IObjectPooled>> dictionary, Func<PoolObject, IObjectPooled> create, PoolEvents events)
         {
             dictionary = new Dictionary<EntityId, IObjectPool<IObjectPooled>>();
             
-            foreach (var @object in List.Prefabs)
+            foreach (var @object in ListHash.Prefabs)
                 dictionary.Add(@object.GetEntityId(), Create(() => create?.Invoke(@object), events));
         }
     }

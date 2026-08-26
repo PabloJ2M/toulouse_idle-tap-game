@@ -9,7 +9,7 @@ public static class ScheduleTask
     
     private static async Awaitable OverrideTaskAsync(this Object owner, TaskAsync task, Action onComplete)
     {
-        ulong currentVersion = task.Next();
+        var currentVersion = task.Next();
         await Awaitable.WaitForSecondsAsync(task.Time);
  
         if (owner && task.IsCurrent(currentVersion))
@@ -56,7 +56,7 @@ public static class ScheduleTask
     {
         var remaining = task.Duration - (float)elapsedSeconds;
         
-        while (remaining > 0 || task.Duration == 0)
+        while (remaining > 0 || task.Duration < 0)
         {
             var sinceLastTick = (float)(elapsedSeconds % task.TaskInterval);
             var nextTickIn = task.TaskInterval - sinceLastTick;

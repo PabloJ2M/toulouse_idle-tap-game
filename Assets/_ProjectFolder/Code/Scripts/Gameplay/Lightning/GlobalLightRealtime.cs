@@ -17,24 +17,28 @@ namespace Gameplay.Environment.Lightning
         
         private const float MaxDayTime = 24f;
 
-        private static readonly TaskLoopAsync TaskLoop = new(0f, 3600f);
+        private static readonly TaskLoopAsync TaskLoop = new(-1f, 3600f);
         
         private void Awake() => light2D ??= GetComponent<Light2D>();
         private void Reset() => light2D = GetComponent<Light2D>();
-        private void OnValidate() => OnUpdate();
+        private void OnValidate() => SetLightIntensity();
         
         private void Start()
         {
             this.LoopTask(TaskLoop, OnUpdate);
-            currentTime = DateTime.Now.Hour;
             OnUpdate();
         }
-
         private void OnUpdate()
         {
+            currentTime = DateTime.Now.Hour;
+            SetLightIntensity();
+        }
+
+        private void SetLightIntensity()
+        {
             if (!light2D) return;
-            
             var time = currentTime / MaxDayTime;
+            
             light2D.color = ambientColor.Evaluate(time);
             light2D.intensity = intensityThreshold.Evaluate(time);
             onValueChanged.Invoke(light2D.color);

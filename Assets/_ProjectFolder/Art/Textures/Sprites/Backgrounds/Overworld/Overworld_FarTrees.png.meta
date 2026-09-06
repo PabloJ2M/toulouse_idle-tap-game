@@ -1,16 +1,10 @@
 fileFormatVersion: 2
-guid: c91e689cc657ca10ba1b17fba85ad172
+guid: 61baf856fa71f50359f0d1658b73941d
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 7508633101924219933
-    second: ForeGround_0
-  - first:
-      213: -6548735459514812814
-    second: ForeGround_1
-  - first:
-      213: 890333200171420123
-    second: ForeGround_2
+      213: -4444971312978487790
+    second: FarTrees_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -43,7 +37,7 @@ TextureImporter:
   maxTextureSize: 2048
   textureSettings:
     serializedVersion: 2
-    filterMode: 1
+    filterMode: 0
     aniso: 1
     mipBias: 0
     wrapU: 0
@@ -78,12 +72,12 @@ TextureImporter:
   platformSettings:
   - serializedVersion: 4
     buildTarget: DefaultTexturePlatform
-    maxTextureSize: 2048
+    maxTextureSize: 1024
     resizeAlgorithm: 0
     textureFormat: -1
     textureCompression: 1
     compressionQuality: 50
-    crunchedCompression: 0
+    crunchedCompression: 1
     allowsAlphaSplitting: 0
     overridden: 0
     ignorePlatformSupport: 0
@@ -145,13 +139,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: ForeGround_0
+      name: FarTrees_0
       rect:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 90
-        height: 44
+        width: 640
+        height: 265
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -160,52 +154,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: d1cbee41606043860800000000000000
-      internalID: 7508633101924219933
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: ForeGround_1
-      rect:
-        serializedVersion: 2
-        x: 137
-        y: 0
-        width: 276
-        height: 74
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 2767d97dbc73e15a0800000000000000
-      internalID: -6548735459514812814
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: ForeGround_2
-      rect:
-        serializedVersion: 2
-        x: 481
-        y: 0
-        width: 159
-        height: 66
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: bd944ff04591b5c00800000000000000
-      internalID: 890333200171420123
+      spriteID: 2169d1d242a4052c0800000000000000
+      internalID: -4444971312978487790
       vertices: []
       indices: 
       edges: []
@@ -224,9 +174,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      ForeGround_0: 7508633101924219933
-      ForeGround_1: -6548735459514812814
-      ForeGround_2: 890333200171420123
+      FarTrees_0: -4444971312978487790
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

@@ -104,6 +104,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dcd146af2f58c84e6b0ee42294464394, type: 3}
   m_Name: 
   m_EditorClassIdentifier: System.Pool.Samples::UnityEngine.Pool.Effects.ParticlePhysics
+  <GameObject>k__BackingField: {fileID: 1384793166662688874}
+  <Transform>k__BackingField: {fileID: 5294723088588288607}
   lifetime: 0.5
   onParticleUpdate:
     m_PersistentCalls:

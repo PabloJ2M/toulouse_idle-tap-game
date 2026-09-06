@@ -15,7 +15,7 @@ namespace UnityEngine.Pool
         
         public Transform Container => container;
         
-        public ObjectPool<IObjectPooled> Create(Func<IObjectPooled> create, PoolEvents events) =>
+        public ObjectPool<IObjectPooled> Init(Func<IObjectPooled> create, PoolEvents events) =>
             new(create, events.OnGet, events.OnRelease, events.OnDestroy, collectionCheck, defaultCapacity, maxSize);
     }
 
@@ -28,14 +28,14 @@ namespace UnityEngine.Pool
     [Serializable]
     public class PoolArraySettings : PoolSettings<ScriptablePoolListBase>
     {
-        public ScriptablePoolListBase ListHash => reference;
+        public ScriptablePoolListBase List => reference;
 
-        public void Create(ref IDictionary<EntityId, IObjectPool<IObjectPooled>> dictionary, Func<PoolObject, IObjectPooled> create, PoolEvents events)
+        public void Init(ref IDictionary<EntityId, IObjectPool<IObjectPooled>> dictionary, Func<IObjectPooled, IObjectPooled> create, PoolEvents events)
         {
             dictionary = new Dictionary<EntityId, IObjectPool<IObjectPooled>>();
             
-            foreach (var @object in ListHash.Prefabs)
-                dictionary.Add(@object.GetEntityId(), Create(() => create?.Invoke(@object), events));
+            foreach (var @object in List.Prefabs)
+                dictionary.Add(@object.EntityId, Init(() => create?.Invoke(@object), events));
         }
     }
 }

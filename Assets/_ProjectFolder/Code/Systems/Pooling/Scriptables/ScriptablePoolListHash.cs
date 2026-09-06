@@ -8,12 +8,12 @@ namespace UnityEngine.Pool
         [SerializeField] private PoolObject[] prefabs;
         private readonly HashSet<PoolObject> _hash = new();
         
-        public override IReadOnlyCollection<PoolObject> Prefabs => _hash;
+        public override IReadOnlyCollection<IObjectPooled> Prefabs => _hash;
         
-        public override PoolObject this[int index] => prefabs[index];
-        public override PoolObject RandomPrefab => prefabs[Random.Range(0, prefabs.Length)];
+        public override IObjectPooled this[int index] => prefabs[index];
+        public override IObjectPooled RandomPrefab => this[Random.Range(0, prefabs.Length)];
         
-        public override bool Contains(PoolObject prefab) => _hash.Contains(prefab);
+        public override bool Contains(IObjectPooled prefab) => _hash.Contains((PoolObject)prefab);
 
         #region HashSet Validation
         public void OnBeforeSerialize() { }

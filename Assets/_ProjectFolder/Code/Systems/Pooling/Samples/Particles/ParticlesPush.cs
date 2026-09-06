@@ -5,7 +5,6 @@ namespace UnityEngine.Pool.Effects
         [Header("Effect Controller")]
         [SerializeField] private Vector2 direction;
         [SerializeField] private float torque;
-
         [SerializeField] private bool flipX;
         
         public void SetFlipX(bool value) => flipX = value;
@@ -17,7 +16,7 @@ namespace UnityEngine.Pool.Effects
             
             particle.Transform.position = instance.Transform.position;
             SetImage(particle, instance);
-            
+
             var finalDirection = direction;
             finalDirection.x *= flipX ? -1 : 1;
             

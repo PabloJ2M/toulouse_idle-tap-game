@@ -7,10 +7,10 @@ namespace UnityEngine.Pool
         
         public override void Translate(float value)
         {
-            float amount = value * multiplier * Time.fixedDeltaTime;
-            Vector3 direction = amount * axis;
+            var amount = value * multiplier * Time.fixedDeltaTime;
+            var direction = amount * axis;
             
-            for (int i = Manager.LastIndex; i >= 0; i--)
+            for (var i = Manager.LastIndex; i >= 0; i--)
                 Manager.Spawned[i].Transform.Translate(direction);
             
             Manager.OnTranslate(amount);

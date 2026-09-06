@@ -1,19 +1,20 @@
 namespace UnityEngine.Pool
 {
-    public abstract class SpawnerByDistance : PoolArrayBehaviour
+    public abstract class SpawnerByDistance : PoolArrayBehaviourEvents
     {
         [SerializeField] private float distance;
-        private float _travelled;
         
+        protected float Travelled { get; private set; }
+
         public void OnTranslate(float value)
         {
-            _travelled += value;
+            Travelled += value;
             
-            if (_travelled < distance) return;
-            _travelled %= distance;
-            OnSpawn();
+            if (Travelled < distance) return;
+            Travelled %= distance;
+            OnSpawnItem();
         }
         
-        protected abstract void OnSpawn();
+        protected abstract void OnSpawnItem();
     }
 }

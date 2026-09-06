@@ -4,11 +4,7 @@ namespace UnityEngine.Pool.Effects
     {
         private Rigidbody2D _rigidbody;
 
-        protected override void Awake()
-        {
-            base.Awake();
-            _rigidbody = GetComponent<Rigidbody2D>();
-        }
+        protected void Awake() => _rigidbody = GetComponent<Rigidbody2D>();
 
         public override void Enable()
         {

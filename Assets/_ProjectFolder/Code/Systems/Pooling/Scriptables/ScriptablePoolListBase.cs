@@ -4,11 +4,11 @@ namespace UnityEngine.Pool
 {
     public abstract class ScriptablePoolListBase : ScriptableObject
     {
-        public abstract PoolObject this[int index] { get; }
-        public abstract IReadOnlyCollection<PoolObject> Prefabs { get; }
+        public abstract IObjectPooled this[int index] { get; }
+        public abstract IReadOnlyCollection<IObjectPooled> Prefabs { get; }
         public int Count => Prefabs.Count;
 
-        public abstract PoolObject RandomPrefab { get; }
-        public abstract bool Contains(PoolObject prefab);
+        public abstract IObjectPooled RandomPrefab { get; }
+        public abstract bool Contains(IObjectPooled prefab);
     }
 }

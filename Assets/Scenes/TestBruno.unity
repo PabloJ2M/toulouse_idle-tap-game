@@ -9671,7 +9671,7 @@ MonoBehaviour:
     collectionCheck: 1
     defaultCapacity: 10
     maxSize: 100
-  distance: 0
+  distance: 10
 --- !u!114 &1900121640
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -8,11 +8,11 @@ namespace UnityEngine.Pool
         
         private IObjectPool<IObjectPooled> _pool;
 
-        protected virtual void Awake() => _pool = poolSettings.Create(OnCreate, new(OnGet, OnRelease, OnDestroyObject));
+        protected virtual void Awake() => _pool = poolSettings.Init(OnCreate, new(OnGet, OnRelease, OnDestroyObject));
         protected virtual IObjectPooled OnCreate()
         {
             var @object = Instantiate(poolSettings.Prefab, poolSettings.Container).GetComponent<IObjectPooled>();
-            @object.SetPoolReference(_pool);
+            @object.Reference = _pool;
             return @object;
         }
 
@@ -23,17 +23,27 @@ namespace UnityEngine.Pool
         [SerializeField] protected PoolArraySettings poolSettings;
 
         private IDictionary<EntityId, IObjectPool<IObjectPooled>> _pools;
+        private readonly Queue<EntityId> _forcedEntities = new();
         
-        protected virtual void Awake() => poolSettings.Create(ref _pools, OnCreate, new(OnGet, OnRelease, OnDestroyObject));
-        protected virtual IObjectPooled OnCreate(PoolObject prefab)
+        protected virtual void Awake() => poolSettings.Init(ref _pools, OnCreate, new(OnGet, OnRelease, OnDestroyObject));
+        protected virtual IObjectPooled OnCreate(IObjectPooled prefab)
         {
-            var obj = Instantiate(prefab, poolSettings.Container).GetComponent<IObjectPooled>();
-            obj.SetPoolReference(_pools[prefab.GetEntityId()]);
-            return obj;
+            var @object = Instantiate(prefab as PoolObject, poolSettings.Container);
+            @object.Reference = _pools[prefab.EntityId];
+            return @object;
         }
 
-        protected IObjectPooled GetPrefabByEntityId(EntityId entityId) => _pools[entityId].Get();
-        protected IObjectPooled GetPrefabByIndex(int index) => GetPrefabByEntityId(poolSettings.ListHash[index].GetEntityId());
-        protected IObjectPooled GetPrefabRandom() => GetPrefabByEntityId(poolSettings.ListHash.RandomPrefab.GetEntityId());
+        public void ForceNext(IObjectPooled prefab) => _forcedEntities?.Enqueue(prefab.EntityId);
+        
+        private IObjectPooled GetPrefabByEntityId(EntityId entityId) =>
+            _pools[entityId].Get();
+        
+        protected IObjectPooled GetPrefabByIndex(int index) =>
+            GetPrefabByEntityId(poolSettings.List[index].EntityId);
+        
+        protected IObjectPooled GetPrefabRandom() =>
+            _forcedEntities.Count == 0
+            ? GetPrefabByEntityId(poolSettings.List.RandomPrefab.EntityId)
+            : GetPrefabByEntityId(_forcedEntities.Dequeue());
     }
 }

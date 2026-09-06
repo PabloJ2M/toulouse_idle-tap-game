@@ -122,3 +122,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bab221a323260c60c9df1114da2775c8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: System.Pool::UnityEngine.Pool.PoolObject
+  <GameObject>k__BackingField: {fileID: 1384793166662688874}
+  <Transform>k__BackingField: {fileID: 5294723088588288607}

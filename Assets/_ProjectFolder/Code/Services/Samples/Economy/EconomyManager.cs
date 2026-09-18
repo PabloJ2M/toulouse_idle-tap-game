@@ -21,7 +21,7 @@ namespace Unity.Services.Economy.Samples
             OnUpdateBalance();
         }
         
-        public long GetBalance(BalanceType type) => balances.TryGetValue(type, out var value) ? value : 0;
+        public long GetBalance(BalanceType type) => balances.GetValueOrDefault(type, 0);
         public void SetBalanceID(BalanceType type, long amount)
         {
             balances[type] = amount;
@@ -34,9 +34,8 @@ namespace Unity.Services.Economy.Samples
 
         private void OnLoadLocalData()
         {
-            Dictionary<BalanceType, long> dictionary = balances;
+            var dictionary = balances.Parse();
             saveData.Load(ref dictionary);
-            balances.Parse(dictionary);
         }
         private void OnUpdateBalance()
         {

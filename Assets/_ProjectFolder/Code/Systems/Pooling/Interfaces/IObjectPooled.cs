@@ -4,10 +4,9 @@ namespace UnityEngine.Pool
     {
         GameObject GameObject { get; }
         Transform Transform { get; }
+        EntityId EntityId { get; }
         
         IObjectPool<IObjectPooled> Reference { get; set; }
-
-        void SetPoolReference(IObjectPool<IObjectPooled> pool) => Reference = pool;
         
         void Enable();
         void Disable();

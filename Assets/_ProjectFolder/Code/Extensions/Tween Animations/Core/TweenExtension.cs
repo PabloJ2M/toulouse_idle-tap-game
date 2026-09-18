@@ -27,6 +27,20 @@ namespace UnityEngine.Animations
 
             return result;
         }
+        public static Vector3 Get(this Axis axis, Vector3 oldValue, Vector3 newValue)
+        {
+            var result = Vector3.zero;
+            
+            result.x = (axis & Axis.X) != 0 ? newValue.x : oldValue.x;
+            result.y = (axis & Axis.Y) != 0 ? newValue.y : oldValue.y;
+            result.z = (axis & Axis.Z) != 0 ? newValue.z : oldValue.z;
+
+            return result;
+        }
+        public static Vector2 Get(this Axis axis, Vector2 oldValue, Vector2 newValue)
+        {
+            return Get(axis, (Vector3)oldValue, (Vector3)newValue);
+        }
         public static Vector3 GetInverse(this Axis axis)
         {
             var result = Vector3.one;

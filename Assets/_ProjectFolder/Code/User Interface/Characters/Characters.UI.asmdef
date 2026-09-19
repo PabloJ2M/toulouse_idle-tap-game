@@ -2,7 +2,9 @@
     "name": "Characters.UI",
     "rootNamespace": "Gameplay.Characters.UI",
     "references": [
-        "GUID:8288a860ea6bac276a3312177645221a"
+        "GUID:8288a860ea6bac276a3312177645221a",
+        "GUID:8fddaf851eae0545aaf9a14eeb5662bd",
+        "GUID:f81ab484c9bc94dd39e100e6608aa7f9"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],

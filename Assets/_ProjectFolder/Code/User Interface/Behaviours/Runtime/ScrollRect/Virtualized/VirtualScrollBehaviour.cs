@@ -46,7 +46,7 @@ namespace UnityEngine.UI
 
         private void OnUpdateScroll(bool force = false)
         {
-            if (_data == null || _data.Count == 0) return;
+            if (layout == null || _data == null || _data.Count == 0) return;
 
             var scrollPos = Mathf.Abs(layout.GetScrollPosition(_scroll));
             var viewportSize = layout.GetViewportSize(_scroll);

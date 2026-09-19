@@ -1,0 +1,16 @@
+{
+    "name": "Characters.UI",
+    "rootNamespace": "Gameplay.Characters.UI",
+    "references": [
+        "GUID:8288a860ea6bac276a3312177645221a"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

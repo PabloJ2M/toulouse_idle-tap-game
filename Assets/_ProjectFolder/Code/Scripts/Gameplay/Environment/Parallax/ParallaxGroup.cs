@@ -8,14 +8,17 @@ namespace Gameplay.Environment.Parallax
         [SerializeField, Range(-1f, 1f)] private float speed = 1;
         
         private ParallaxLayer[] _layers;
+        private float speedMultiplier = 1f;
 
         private void Awake() => _layers = GetComponentsInChildren<ParallaxLayer>();
         private void FixedUpdate()
         {
-            var displacement = speed * Time.deltaTime * direction;
+            var displacement = speed * speedMultiplier * Time.deltaTime * direction;
             
             foreach (var layer in _layers)
                 layer.OnUpdate(displacement);
         }
+        
+        public void SetSpeedMultiplier(float multiplier) => speedMultiplier = Mathf.Clamp01(multiplier);
     }
 }

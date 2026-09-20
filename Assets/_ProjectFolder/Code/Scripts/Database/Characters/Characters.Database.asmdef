@@ -1,7 +1,9 @@
 {
     "name": "Characters.Database",
     "rootNamespace": "Gameplay.Characters.Database",
-    "references": [],
+    "references": [
+        "GUID:8731285bcb70543efb424a002285420b"
+    ],
     "includePlatforms": [],
     "excludePlatforms": [],
     "allowUnsafeCode": false,

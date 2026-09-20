@@ -12,9 +12,9 @@ namespace UnityEngine.UI
         [SerializeField] private int buffer = 2;
 
         [SerializeReference] private IVirtualLayout layout;
-
         private ScrollRect _scroll;
-        private IList<T> _data;
+
+        protected IList<T> Data;
 
         private readonly Dictionary<int, VirtualObject> _activeItems = new();
         private int _firstVisible = -1, _lastVisible = -1;
@@ -34,7 +34,7 @@ namespace UnityEngine.UI
 
         private void RecalculateLayout()
         {
-            layout?.CalculateLayout(_data.Count, GetDynamicSize);
+            layout?.CalculateLayout(Data.Count, GetDynamicSize);
             layout?.UpdateContainerSize(_scroll.content);
         }
         private void ResetView()
@@ -46,12 +46,12 @@ namespace UnityEngine.UI
 
         private void OnUpdateScroll(bool force = false)
         {
-            if (layout == null || _data == null || _data.Count == 0) return;
+            if (layout == null || Data == null || Data.Count == 0) return;
 
             var scrollPos = Mathf.Abs(layout.GetScrollPosition(_scroll));
             var viewportSize = layout.GetViewportSize(_scroll);
 
-            layout.ComputeVisibleRange(scrollPos, viewportSize, _data.Count, buffer,
+            layout.ComputeVisibleRange(scrollPos, viewportSize, Data.Count, buffer,
                 out var newFirst, out var newLast);
 
             if (!force && newFirst == _firstVisible && newLast == _lastVisible) return;
@@ -96,7 +96,7 @@ namespace UnityEngine.UI
         
         public void SetData(IList<T> values)
         {
-            _data = values;
+            Data = values;
             Canvas.ForceUpdateCanvases();
 
             RecalculateLayout();

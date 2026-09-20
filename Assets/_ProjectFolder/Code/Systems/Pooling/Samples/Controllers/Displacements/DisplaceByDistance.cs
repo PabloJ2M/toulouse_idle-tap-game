@@ -5,7 +5,7 @@ namespace UnityEngine.Pool
         [SerializeField] private float multiplier = 1f;
         [SerializeField] private Vector3 axis = Vector3.up;
 
-        private void FixedUpdate() => Translate(Time.fixedDeltaTime);
+        // private void FixedUpdate() => Translate(Time.fixedDeltaTime);
 
         public override void Translate(float value)
         {
